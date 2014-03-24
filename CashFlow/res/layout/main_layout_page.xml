@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_bg_hover"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal">
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+            
+            <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:textStyle="bold"
+	            android:textSize="20sp"
+	            android:text="Input Your First Fund"/>
+	        
+	        <EditText 
+	            style="@style/edit_theme"
+	            android:layout_margin="10dp" />
+	        
+	        <Button 
+	            android:id="@+id/button_first_fund"
+	            android:layout_width="100dp"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/button_blue_selector"
+	            android:textColor="@color/white"
+	            android:text="Simpan"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+            
+            <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:textStyle="bold"
+	            android:textSize="20sp"
+	            android:text="Your Balance Now"/>
+            
+            <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:layout_marginBottom="10dp"
+	            android:textColor="@color/dark_yellow"
+	            android:textStyle="bold"
+	            android:textSize="20sp"
+	            android:text="Rp 1.000.000,-"/>
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>
