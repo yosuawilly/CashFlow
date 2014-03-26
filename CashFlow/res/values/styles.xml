@@ -4,7 +4,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -26,7 +26,7 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
     
-    <style name="app_theme_with_action_bar" parent="Theme.AppCompat.Light">
+    <style name="app_theme_with_action_bar" parent="Theme.Sherlock.Light">
         <item name="android:windowBackground">@drawable/background_image</item>
         <item name="android:listViewStyle">@style/TransparentListView</item>
         <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
@@ -34,7 +34,23 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/Animation.MyAnimation</item>
         <item name="actionBarTabTextStyle">@style/text_tab_action_bar</item>
+        
+        <!--<item name="android:actionBarTabStyle">@style/ActionBarTab</item>
+        <item name="android:actionBarStyle">@style/ActionBarBlank</item>-->
+	    <!--<item name="actionBarTabStyle">@style/ActionBarTab</item>-->
+	    <item name="actionBarStyle">@style/ActionBarBlank</item>
     </style>
+    
+    <!-- Styles for the above theme for tab-->
+	<style name="ActionBarBlank" parent="Widget.Sherlock.ActionBar">
+	    <item name="android:background">@android:color/transparent</item>
+	    <item name="background">@android:color/transparent</item>
+	</style>
+	
+	<style name="ActionBarTab" parent="Widget.Sherlock.ActionBar.TabView">
+	    <item name="android:background">@android:color/transparent</item>
+	    <item name="background">@android:color/transparent</item>
+	</style>
     
     <style name="app_theme" parent="android:Theme">
         <item name="android:windowBackground">@drawable/background_image</item>

@@ -25,5 +25,6 @@ public final class Constant {
 	public static final int REDIRECT_TO_HOME = 1;
 	public static final int REDIRECT_TO_TRANSACTION = 2;
 	public static final int REDIRECT_TO_SETTING = 3;
+	public static final int REDIRECT_TO_LOGIN = 4;
 
 }

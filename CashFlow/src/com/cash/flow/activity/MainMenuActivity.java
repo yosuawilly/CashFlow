@@ -1,9 +1,9 @@
 package com.cash.flow.activity;
 
 import com.cash.flow.R;
-import com.cash.flow.activity.base.BaseCashFlowActivity;
+import com.cash.flow.activity.base.BaseCashFlowNoActionBarActivity;
 
-public class MainMenuActivity extends BaseCashFlowActivity{
+public class MainMenuActivity extends BaseCashFlowNoActionBarActivity{
 
 	@Override
 	public int getIdViewToInflate() {

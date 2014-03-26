@@ -1,8 +1,9 @@
 package com.cash.flow.activity;
 
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -18,18 +19,19 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 		super.initDesign();
 		initLayoutHeader();
 		
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		getMyActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
+			getMyActionBar().addTab(getMyActionBar().newTab().setText(tab_name)
                     .setTabListener(this));
         }
-		actionBar.show();
+		getMyActionBar().show();
+		
 	}
 	
 	protected void initLayoutHeader() {
 		View v = getLayoutInflater().inflate(R.layout.layout_header, null);
-    	((FrameLayout)findViewById(android.support.v7.appcompat.R.id.activity_header)).addView(v);
+    	((FrameLayout)findViewById(com.actionbarsherlock.R.id.activity_header)).addView(v);
     	
     	findViewById(R.id.layout_header).setVisibility(View.GONE);
     }
@@ -40,12 +42,6 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		
@@ -53,6 +49,12 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		
 	}

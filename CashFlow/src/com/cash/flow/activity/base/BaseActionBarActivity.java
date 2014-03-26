@@ -1,16 +1,18 @@
 package com.cash.flow.activity.base;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Window;
 import com.cash.flow.R;
 import com.cash.flow.activity.LoginActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
-public class BaseActionBarActivity extends ActionBarActivity{
+public class BaseActionBarActivity extends SherlockFragmentActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
 		super.onCreate(savedInstanceState);
 		overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_left );
 	}
