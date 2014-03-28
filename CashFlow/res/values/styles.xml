@@ -1,4 +1,5 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:tools="http://schemas.android.com/tools">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -30,13 +31,13 @@
         <item name="android:windowBackground">@drawable/background_image</item>
         <item name="android:listViewStyle">@style/TransparentListView</item>
         <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/Animation.MyAnimation</item>
         <item name="actionBarTabTextStyle">@style/text_tab_action_bar</item>
         
-        <!--<item name="android:actionBarTabStyle">@style/ActionBarTab</item>
-        <item name="android:actionBarStyle">@style/ActionBarBlank</item>-->
+        <!--<item name="android:actionBarTabStyle">@style/ActionBarTab</item>-->
+        <item name="android:actionBarStyle" tools:targetApi="11" >@style/ActionBarBlank</item>
 	    <!--<item name="actionBarTabStyle">@style/ActionBarTab</item>-->
 	    <item name="actionBarStyle">@style/ActionBarBlank</item>
     </style>

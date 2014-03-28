@@ -12,7 +12,7 @@ public class BaseActionBarActivity extends SherlockFragmentActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+		//requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
 		super.onCreate(savedInstanceState);
 		overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_left );
 	}

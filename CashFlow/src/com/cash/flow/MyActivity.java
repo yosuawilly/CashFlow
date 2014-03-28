@@ -2,6 +2,7 @@ package com.cash.flow;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -61,9 +62,15 @@ public class MyActivity<T extends Activity> implements Functional, OnClickListen
 	public void initDesign() {
 		if(initActivity.withActionBar()) {
 			actionBar = ((SherlockFragmentActivity)activity).getSupportActionBar();
-	    	actionBar.setDisplayShowTitleEnabled(false);
-	    	actionBar.setDisplayShowHomeEnabled(false);
+			actionBar.setDisplayShowHomeEnabled(false);
+		    actionBar.setDisplayShowTitleEnabled(false);
+		    //actionBar.setDisplayShowCustomEnabled(true);
 	    	actionBar.setHomeButtonEnabled(false);
+//	    	View homeIcon = activity.findViewById(
+//	                Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? 
+//	                android.R.id.home : R.id.abs__home);
+//	        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+	        //((View) homeIcon).setVisibility(View.GONE);
 	    	actionBar.hide();
 		}
 		

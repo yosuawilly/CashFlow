@@ -2,6 +2,7 @@ package com.cash.flow.activity.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 
 import com.cash.flow.MyActivity;
 import com.cash.flow.R;
@@ -15,6 +16,7 @@ public abstract class BaseCashFlowNoActionBarActivity extends BaseMyActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setLayoutMode(true, MyLayout.LINEARLAYOUT);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		myActivity.onCreate();
 	}

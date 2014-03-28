@@ -5,7 +5,8 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowActivity;
@@ -30,9 +31,12 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 	}
 	
 	protected void initLayoutHeader() {
-		View v = getLayoutInflater().inflate(R.layout.layout_header, null);
-    	((FrameLayout)findViewById(com.actionbarsherlock.R.id.activity_header)).addView(v);
-    	
+		LinearLayout v = (LinearLayout) getLayoutInflater().inflate(R.layout.layout_header, null);
+    	//((FrameLayout)findViewById(com.actionbarsherlock.R.id.activity_header)).addView(v);
+		ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+		ViewGroup child = (ViewGroup) decor.getChildAt(0);
+		child.addView(v, 0);
+		
     	findViewById(R.id.layout_header).setVisibility(View.GONE);
     }
 
