@@ -15,4 +15,5 @@
     <drawable name="altercolor1">#FFFEE1</drawable>
     <drawable name="altercolor2">#F6F6F6</drawable>
     <drawable name="altercolordefault">#f6f6f6</drawable>
+    <drawable name="tab_divider_bottom">#3366CC</drawable>
 </resources>

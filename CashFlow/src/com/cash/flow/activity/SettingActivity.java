@@ -1,9 +1,54 @@
 package com.cash.flow.activity;
 
-import com.cash.flow.R;
-import com.cash.flow.activity.base.BaseCashFlowActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 
-public class SettingActivity extends BaseCashFlowActivity{
+import com.cash.flow.R;
+import com.cash.flow.activity.base.BaseCashFlowListActivity;
+import com.cash.flow.activity.setting.ChangePasswordActivity;
+import com.cash.flow.adapter.MenuListAdapter;
+import com.cash.flow.util.Constant;
+
+public class SettingActivity extends BaseCashFlowListActivity{
+	//private TabSetupTools tabSetupTools;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+//		tabSetupTools = new TabSetupTools(this, savedInstanceState, R.id.tabhost, new String[]{"CobaTab","CobaTab2"});
+//		tabSetupTools.generateTabs();
+	}
+	
+	@Override
+	public void initDesign() {
+		super.initDesign();
+		buildDefaultList(new String[]{
+				"Change Password",
+				"Set Margin",
+				"Currency"
+		}, new int[]{
+				R.drawable.change_password_icon,
+				R.drawable.coins,
+				R.drawable.dollars
+		});
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		MenuListAdapter adapter = (MenuListAdapter) l.getAdapter();
+		String item = adapter.getItem(position);
+		if("Change Password".equalsIgnoreCase(item)) {
+			Intent intent = new Intent(this, ChangePasswordActivity.class);
+			startActivityForResult(intent, Constant.START_ACTIVITY);
+		} else if("Set Margin".equals(item)) {
+			
+		} else if("Currency".equals(item)) {
+			
+		}
+	}
 
 	@Override
 	public int getIdViewToInflate() {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="PxUsage" >
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bg_hover"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:orientation="vertical">
+        
+        <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginBottom="5dp">
+	        <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="Nominal"
+		        android:textStyle="bold"
+		        android:textColor="@color/black"
+		        android:layout_weight="0.4"/>
+	     
+		    <EditText 
+		        android:id="@+id/usernameEdit"
+		        style="@style/edit_theme"
+		        android:layout_width="0dp"
+		        android:singleLine="true"
+		        android:maxLength="20"
+		        android:layout_weight="0.6"/>
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="Description"
+		        android:textStyle="bold"
+		        android:textColor="@color/black"
+		        android:layout_weight="0.4"/>
+	     
+		    <EditText 
+		        android:id="@+id/passwordEdit"
+		        style="@style/edit_theme"
+		        android:layout_width="0dp"
+		        android:singleLine="true"
+		        android:maxLength="20"
+		        android:inputType="textPassword"
+		        android:layout_weight="0.6"/>
+	    </LinearLayout>
+	    
+	    <Button 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:text="Save"
+	        android:textColor="@color/white"
+	        android:background="@drawable/green_button_gradient"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

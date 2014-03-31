@@ -14,6 +14,7 @@ public abstract class BaseCashFlowActivity extends BaseMyActionBarActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setLayoutMode(true, MyLayout.LINEARLAYOUT);
 		super.onCreate(savedInstanceState);
 		myActivity.onCreate();
 	}

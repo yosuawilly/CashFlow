@@ -1,17 +1,18 @@
 package com.cash.flow.activity.base;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.cash.flow.R;
 import com.cash.flow.activity.LoginActivity;
+import com.cash.flow.adapter.MenuListAdapter;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 
-public class BaseActionBarActivity extends SherlockFragmentActivity{
+public class BaseListActivity extends ListActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
 		super.onCreate(savedInstanceState);
 		overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_left );
 	}
@@ -21,6 +22,18 @@ public class BaseActionBarActivity extends SherlockFragmentActivity{
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 		this.finish();
+	}
+	
+	protected void buildDefaultList(String[]items, int[]idIcons) {
+		ListView listView = getListView();
+		listView.setDivider(this.getResources().getDrawable(R.drawable.menu_list_sparator));
+		listView.setDividerHeight(1);
+		
+		MenuListAdapter listAdapter = new MenuListAdapter(this, items, idIcons);
+		setListAdapter(listAdapter);
+		
+		listView.setVerticalFadingEdgeEnabled(true);
+		listView.setCacheColorHint(R.color.cache_color);
 	}
 	
     long pauseTime = System.currentTimeMillis();
@@ -50,5 +63,5 @@ public class BaseActionBarActivity extends SherlockFragmentActivity{
 			}
 //		}
 	}
-
+	
 }

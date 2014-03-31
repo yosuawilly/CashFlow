@@ -31,7 +31,7 @@
         <item name="android:windowBackground">@drawable/background_image</item>
         <item name="android:listViewStyle">@style/TransparentListView</item>
         <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
-        <item name="windowNoTitle">true</item>
+        <!--<item name="windowNoTitle">true</item>-->
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@style/Animation.MyAnimation</item>
         <item name="actionBarTabTextStyle">@style/text_tab_action_bar</item>

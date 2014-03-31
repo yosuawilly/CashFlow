@@ -33,7 +33,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.cash.flow.activity.EmptyActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
             android:name="com.cash.flow.activity.LoginActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="com.cash.flow.activity.setting.ChangePasswordActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
