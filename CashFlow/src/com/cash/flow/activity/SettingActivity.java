@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowListActivity;
 import com.cash.flow.activity.setting.ChangePasswordActivity;
+import com.cash.flow.activity.setting.SetMarginActivity;
 import com.cash.flow.adapter.MenuListAdapter;
 import com.cash.flow.util.Constant;
 
@@ -44,7 +45,8 @@ public class SettingActivity extends BaseCashFlowListActivity{
 			Intent intent = new Intent(this, ChangePasswordActivity.class);
 			startActivityForResult(intent, Constant.START_ACTIVITY);
 		} else if("Set Margin".equals(item)) {
-			
+			Intent intent = new Intent(this, SetMarginActivity.class);
+			startActivityForResult(intent, Constant.START_ACTIVITY);
 		} else if("Currency".equals(item)) {
 			
 		}

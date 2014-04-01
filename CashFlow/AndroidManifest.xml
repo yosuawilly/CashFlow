@@ -45,6 +45,10 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
+            android:name="com.cash.flow.activity.setting.SetMarginActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
             android:name="com.cash.flow.activity.MainMenuActivity"
             android:theme="@style/app_theme_with_action_bar"
             android:configChanges="keyboardHidden|orientation" >

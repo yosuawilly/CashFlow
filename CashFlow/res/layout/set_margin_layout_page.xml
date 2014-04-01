@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="PxUsage" xmlns:app="http://schemas.android.com/apk/res/com.cash.flow">
+    
+    <FrameLayout
+        android:id="@+id/layout_header" 
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_header_blue"
+        android:orientation="vertical"
+        android:gravity="center" >
+        
+        <Button 
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/back_navigation_selector"/>
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash Flow"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+        
+    </FrameLayout>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/gradient_bg_hover"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:orientation="vertical">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50px"
+            android:orientation="horizontal"
+            android:layout_margin="5dp" >
+
+            <LinearLayout
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:background="@drawable/icon_rupiah"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/marginEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_nominal_selector"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingLeft="10px"
+                android:textColor="#648a0a"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:cursorVisible="false" >
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+        
+        <com.cash.flow.customcomponent.CustomKeyBoard 
+            android:id="@+id/customKeyboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:maxLength="15">
+            
+        </com.cash.flow.customcomponent.CustomKeyBoard>
+        
+    </LinearLayout>
+
+</LinearLayout>
