@@ -1,10 +1,7 @@
 package com.cash.flow.activity;
 
-import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 
 import android.util.Log;
 import android.view.View;
@@ -16,13 +13,27 @@ import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowActivity;
 import com.cash.flow.adapter.FragmentAdapter;
 import com.cash.flow.customcomponent.CustomViewPager;
+import com.cash.flow.util.TabSetupTools;
+import com.cash.flow.util.TabSetupTools.OnTabChanged;
 
-public class TransactionActivity extends BaseCashFlowActivity implements ActionBar.TabListener, OnPageChangeListener{
+public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged{
 	
 	private String[] tabs = { "Cash In", "Cash Out", "Summary" };
 	
 	private CustomViewPager viewPager;
 	private FragmentAdapter fragmentAdapter;
+	private TabSetupTools tabSetupTools;
+	
+	private boolean changeFromPager = false;
+	private boolean changeFromTab = false;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		tabSetupTools = new TabSetupTools(this, this, savedInstanceState, R.id.tabhost, tabs);
+		tabSetupTools.generateTabs();
+	}
 	
 	@Override
 	public void initObject() {
@@ -33,7 +44,7 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 	@Override
 	public void initDesign() {
 		super.initDesign();
-		initLayoutHeader();
+		//initLayoutHeader();
 		
 		/*init ViewPager*/
 		viewPager = (CustomViewPager) findViewById(R.id.viewPager);
@@ -43,13 +54,13 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 		viewPager.setAdapter(fragmentAdapter);
 		
 		/*init actionbar*/
-		getMyActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		/*getMyActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		for (String tab_name : tabs) {
 			getMyActionBar().addTab(getMyActionBar().newTab().setText(tab_name)
                     .setTabListener(this));
         }
-		getMyActionBar().show();
+		getMyActionBar().show();*/
 		
 	}
 	
@@ -118,24 +129,6 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 	}
 
 	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		int position = tab.getPosition();
-		viewPager.setCurrentItem(position);
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		// TODO Auto-generated method stub
 		
@@ -149,7 +142,31 @@ public class TransactionActivity extends BaseCashFlowActivity implements ActionB
 
 	@Override
 	public void onPageSelected(int position) {
-		getMyActionBar().setSelectedNavigationItem(position);
+		if(changeFromTab) {
+			changeFromTab = false;
+			return;
+		}
+		
+		changeFromPager = true;
+		tabSetupTools.setSelectedTab(position);
+		//getMyActionBar().setSelectedNavigationItem(position);
+	}
+
+	@Override
+	public void onTabChanged(String tabId) {
+		if(changeFromPager) {
+			changeFromPager = false;
+			return;
+		}
+		
+		changeFromTab = true;
+		if(tabId.equals(tabs[0])) {
+			viewPager.setCurrentItem(0);
+		} else if(tabId.equals(tabs[1])) {
+			viewPager.setCurrentItem(1);
+		} else if(tabId.equals(tabs[2])) {
+			viewPager.setCurrentItem(2);
+		}
 	}
 
 }

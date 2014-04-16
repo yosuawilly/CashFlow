@@ -12,19 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.TabHost.OnTabChangeListener;
 
-public class TabSetupTools {
+public class TabSetupTools implements OnTabChangeListener{
 	
 	private Activity activity;
 	private int idTabHost;
 	private String[]tabSpec;
 	
 	private TabHost tabHost;
+	private OnTabChanged onTabChanged;
 	
 	private LocalActivityManager mLocalActivityManager;
 	
 	public TabSetupTools(Activity activity, Bundle savedInstanceState, int idTabHost, String[]tabSpec) {
+		this(activity, null, savedInstanceState, idTabHost, tabSpec);
+	}
+	
+	public TabSetupTools(Activity activity, OnTabChanged onTabChanged, Bundle savedInstanceState, int idTabHost, String[]tabSpec) {
 		this.activity = activity;
+		this.onTabChanged = onTabChanged;
 		this.idTabHost = idTabHost;
 		this.tabSpec = tabSpec;
 		
@@ -46,6 +53,8 @@ public class TabSetupTools {
 			intent = new Intent().setClass(activity, EmptyActivity.class);
 			setupTab(intent, specStr, 0);
 		}
+		
+		tabHost.setOnTabChangedListener(this);
 
 	}
 	
@@ -59,6 +68,7 @@ public class TabSetupTools {
 		View view = LayoutInflater.from(context).inflate(R.layout.tab_component, null);
 		TextView tabsText = (TextView) view.findViewById(R.id.tabLabel);
 		tabsText.setText(tabSpec);
+		if(android.os.Build.VERSION.SDK_INT < 17)
 		if(!tabSpec.equals(this.tabSpec[this.tabSpec.length-1])) {
 			view.findViewById(R.id.tabSplitter).setVisibility(View.VISIBLE);
 		}
@@ -66,6 +76,18 @@ public class TabSetupTools {
 //		image.setBackgroundResource(backgroundResource);
 		return view;
 	}
+	
+	public void setSelectedTab(int position) {
+		tabHost.setCurrentTab(position);
+	}
 
+	@Override
+	public void onTabChanged(String tabId) {
+		if(onTabChanged != null) onTabChanged.onTabChanged(tabId);
+	}
+	
+	public static interface OnTabChanged {
+		void onTabChanged(String tabId);
+	}
 
 }
