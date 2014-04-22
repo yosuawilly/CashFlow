@@ -27,13 +27,14 @@ public class BaseListActivity extends ListActivity{
 	protected void buildDefaultList(String[]items, int[]idIcons) {
 		ListView listView = getListView();
 		listView.setDivider(this.getResources().getDrawable(R.drawable.menu_list_sparator));
-		listView.setDividerHeight(1);
+		//listView.setDividerHeight(1);
 		
 		MenuListAdapter listAdapter = new MenuListAdapter(this, items, idIcons);
 		setListAdapter(listAdapter);
 		
 		listView.setVerticalFadingEdgeEnabled(true);
 		listView.setCacheColorHint(R.color.cache_color);
+		//listView.setOverScrollMode(ListView.OVER_SCROLL_ALWAYS);
 	}
 	
     long pauseTime = System.currentTimeMillis();

@@ -13,14 +13,10 @@ import com.cash.flow.adapter.MenuListAdapter;
 import com.cash.flow.util.Constant;
 
 public class SettingActivity extends BaseCashFlowListActivity{
-	//private TabSetupTools tabSetupTools;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-//		tabSetupTools = new TabSetupTools(this, savedInstanceState, R.id.tabhost, new String[]{"CobaTab","CobaTab2"});
-//		tabSetupTools.generateTabs();
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package com.cash.flow;
 
+import com.cash.flow.activity.ActivationActivity;
 import com.cash.flow.activity.LoginActivity;
 
 import android.app.Activity;
@@ -13,7 +14,29 @@ public class StartUpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_up);
         
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        Thread timer = new Thread(){
+			
+			@Override
+			public void run() {
+				try{
+					int time = 0;
+					while(time < 1500){
+						sleep(100);
+						time += 100;
+					}
+				}catch(Exception ex){
+					ex.printStackTrace();
+				} finally {
+					startActivity(new Intent(StartUpActivity.this, ActivationActivity.class));
+					finish();
+				}
+			}
+			
+		};
+		
+		timer.start();
+        
+        //startActivity(new Intent(this, LoginActivity.class));
+        //finish();
     }
 }

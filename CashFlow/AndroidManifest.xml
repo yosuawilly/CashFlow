@@ -37,6 +37,10 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
+            android:name="com.cash.flow.activity.ActivationActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
             android:name="com.cash.flow.activity.LoginActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>

@@ -107,5 +107,19 @@
 	    <item name="android:shadowDy">1</item>
 	    <item name="android:shadowRadius">2</item>
 	</style>
+	
+    <style name="spinner_theme" parent="android:Theme">
+        <item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:typeface">normal</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:layout_gravity">center_vertical</item>
+		<item name="android:paddingLeft">8dip</item>
+		<item name="android:paddingRight">7dip</item>
+		<item name="android:paddingTop">5dip</item>
+		<item name="android:paddingBottom">5dip</item>
+		<item name="android:textSize">16dip</item>
+		<item name="android:background">@drawable/spinner_selector</item>
+	</style>
 
 </resources>

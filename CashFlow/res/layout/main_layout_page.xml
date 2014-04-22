@@ -29,6 +29,7 @@
 	        
 	        <EditText 
 	            style="@style/edit_theme"
+	            android:singleLine="true"
 	            android:layout_margin="10dp" />
 	        
 	        <Button 
