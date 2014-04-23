@@ -52,8 +52,10 @@
             android:textColor="@color/black" />
         
         <EditText 
+            android:id="@+id/usernameEdit"
             style="@style/edit_theme"
             android:singleLine="true"
+            android:maxLength="10"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
         
@@ -64,8 +66,10 @@
             android:textColor="@color/black" />
         
         <EditText 
+            android:id="@+id/passwordEdit"
             style="@style/edit_theme"
             android:singleLine="true"
+            android:maxLength="10"
             android:inputType="textPassword"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
@@ -82,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
             <Spinner 
+                android:id="@+id/spinnerQuestion"
 	            style="@style/spinner_theme"/>
             <EditText 
                 android:id="@+id/otherQuestionEdit"
@@ -105,6 +110,7 @@
             android:textColor="@color/black" />
         
         <EditText 
+            android:id="@+id/answerEdit"
             style="@style/edit_theme"
             android:singleLine="true"
             android:layout_marginTop="5dp"

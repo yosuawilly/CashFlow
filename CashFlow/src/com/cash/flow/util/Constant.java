@@ -5,10 +5,10 @@ import android.annotation.SuppressLint;
 @SuppressLint("SdCardPath") 
 public final class Constant {
 	
-	public static final String BASE_URL = "http://192.168.16.90/TrackingPelabuhanServer/rest/";
+	//public static final String BASE_URL = "http://192.168.16.90/TrackingPelabuhanServer/rest/";
 	
-	public static final String DB_NAME="TrackingKapalDB";
-	public static final String DB_PATH="/data/data/com.tracking.kapal/databases/";
+	public static final String DB_NAME="CashFlowDB";
+	public static final String DB_PATH="/data/data/com.cash.flow/databases/";
 	
 	/*Constant for restfull http request*/
 	public static final int REST_GET = 0;

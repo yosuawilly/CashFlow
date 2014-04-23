@@ -1,6 +1,9 @@
 package com.cash.flow.activity;
 
 import com.cash.flow.R;
+import com.cash.flow.database.dao.UserDao;
+import com.cash.flow.model.User;
+import com.cash.flow.util.Utility;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -38,9 +41,30 @@ public class LoginActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_login:
-			Intent intent = new Intent(this, MainMenuActivity.class);
-			startActivity(intent);
-			finish();
+			String username = usernameEdit.getText().toString();
+			String password = passwordEdit.getText().toString();
+			
+			if(username.trim().equals("")) {
+				Utility.showMessage(this, "Close", getString(R.string.message_usernameEmpty));
+			} else if(password.trim().equals("")) {
+				Utility.showMessage(this, "Close", getString(R.string.message_passwordEmpty));
+			} else {
+				UserDao userDao = UserDao.getInstance(this);
+				User user = userDao.findUser(username);
+				if(user == null) {
+					Utility.showMessage(this, "Close", getString(R.string.message_usernamePasswordWrong));
+					return;
+				}
+				if(!user.getPassword().equals(password)) {
+					Utility.showMessage(this, "Close", getString(R.string.message_usernamePasswordWrong));
+					return;
+				}
+				
+				Intent intent = new Intent(this, MainMenuActivity.class);
+				startActivity(intent);
+				finish();
+			}
+			
 			break;
 		case R.id.button_forgot:
 			

@@ -4,5 +4,17 @@
     <string name="hello">Hello World, StartUpActivity!</string>
     <string name="app_name">Cash Flow</string>
     <string name="message.problemKomunikasiServer">Problem komunikasi dengan server</string>
+    <string name="message.usernameEmpty">Username must inserted</string>
+    <string name="message.passwordEmpty">Password must inserted</string>
+    <string name="message.questionEmpty">Question must inserted</string>
+    <string name="message.answerEmpty">Answer must inserted</string>
+    
+    <string name="message.usernamePasswordWrong">Username or Password Invalid</string>
+    
+    <string-array name="security_questions">
+        <item>Siapa nama depan ayah anda?</item>
+        <item>Apa nama makanan favorit anda?</item>
+        <item>Dimana anda dilahirkan?</item>
+    </string-array>
 
 </resources>
