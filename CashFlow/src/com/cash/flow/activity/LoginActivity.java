@@ -1,8 +1,11 @@
 package com.cash.flow.activity;
 
 import com.cash.flow.R;
+import com.cash.flow.activity.setting.ForgotPasswordActivity;
 import com.cash.flow.database.dao.UserDao;
+import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.User;
+import com.cash.flow.util.Constant;
 import com.cash.flow.util.Utility;
 
 import android.app.Activity;
@@ -60,6 +63,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					return;
 				}
 				
+				GlobalVar.getInstance().setUser(user);
 				Intent intent = new Intent(this, MainMenuActivity.class);
 				startActivity(intent);
 				finish();
@@ -67,7 +71,8 @@ public class LoginActivity extends Activity implements OnClickListener{
 			
 			break;
 		case R.id.button_forgot:
-			
+			Intent intent = new Intent(this, ForgotPasswordActivity.class);
+			startActivityForResult(intent, Constant.START_ACTIVITY);
 			break;
 		default:
 			break;

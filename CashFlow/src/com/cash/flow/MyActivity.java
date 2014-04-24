@@ -2,7 +2,6 @@ package com.cash.flow;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -168,6 +167,7 @@ public class MyActivity<T extends Activity> implements Functional, OnClickListen
 			Utility.showConfirmMessage(activity, "Logout", "Apakah anda yakin akan logout?", new DialogListener() {
 				@Override
 				public void onDialogClose() {
+					GlobalVar.getInstance().clearAllObject();
 					if(activity.getClass() == MainMenuActivity.class) {
 						Intent intent = new Intent(activity, LoginActivity.class);
 						activity.startActivity(intent);

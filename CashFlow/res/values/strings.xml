@@ -10,6 +10,11 @@
     <string name="message.answerEmpty">Answer must inserted</string>
     
     <string name="message.usernamePasswordWrong">Username or Password Invalid</string>
+    <string name="message.usernameNotFound">Username Not Found</string>
+    <string name="message.answerWrong">Your answer wrong</string>
+    <string name="message.allFieldRequired">All Field Required</string>
+    <string name="message.oldPasswrodWrong">Old password is wrong</string>
+    <string name="message.passwordMismatch">Old password and new password mismatch</string>
     
     <string-array name="security_questions">
         <item>Siapa nama depan ayah anda?</item>

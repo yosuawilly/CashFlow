@@ -49,6 +49,10 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
+            android:name="com.cash.flow.activity.setting.ForgotPasswordActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
             android:name="com.cash.flow.activity.setting.SetMarginActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
