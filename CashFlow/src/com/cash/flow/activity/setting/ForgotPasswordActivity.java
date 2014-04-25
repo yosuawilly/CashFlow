@@ -137,7 +137,7 @@ public class ForgotPasswordActivity extends BaseMyActivity implements OnClickLis
 			} else {
 				user.setPassword(password);
 				UserDao userDao = UserDao.getInstance(this);
-				userDao.updateUser(user);
+				userDao.updateData(user);
 				userDao.closeConnection();
 				
 				this.finish();

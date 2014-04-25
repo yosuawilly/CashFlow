@@ -173,7 +173,7 @@ public class ActivationActivity extends BaseActivity implements Functional, OnCh
 				user.setAnswer(answer);
 				
 				UserDao userDao = UserDao.getInstance(this);
-				userDao.createUser(user);
+				userDao.createData(user);
 				userDao.closeConnection();
 				
 				startActivity(new Intent(this, LoginActivity.class));

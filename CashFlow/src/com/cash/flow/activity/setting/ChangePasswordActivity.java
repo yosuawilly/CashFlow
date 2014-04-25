@@ -71,7 +71,7 @@ public class ChangePasswordActivity extends BaseMyActivity implements OnClickLis
 				
 				GlobalVar.getInstance().getUser().setPassword(newPassword);
 				UserDao userDao = UserDao.getInstance(this);
-				userDao.updateUser(GlobalVar.getInstance().getUser());
+				userDao.updateData(GlobalVar.getInstance().getUser());
 				userDao.closeConnection();
 				
 				onBackPressed();
