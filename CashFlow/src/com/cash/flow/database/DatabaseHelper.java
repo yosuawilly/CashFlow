@@ -13,15 +13,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+	
+	private int DB_TYPE;
+	
+	public static enum DATABASE_TYPE{
+		USER_DB,
+		CASHFLOW_DB
+	}
 
-	public DatabaseHelper(Context context) {
-		super(context, Constant.DB_NAME, null, 1);
+	public DatabaseHelper(Context context, DATABASE_TYPE type) {
+		super(context, type.equals(DATABASE_TYPE.USER_DB) ? Constant.DB_USER_NAME : Constant.DB_NAME, null, 1);
+		this.DB_TYPE = type.ordinal();
 	}
 	
 	private void createAllTable(SQLiteDatabase database) {
 		ConnectionSource connectionSource = new AndroidConnectionSource(database);
-		UserDao.createTable(connectionSource);
-		CashFlowDao.createTable(connectionSource);
+		
+		if(DB_TYPE == DATABASE_TYPE.USER_DB.ordinal()) {
+			UserDao.createTable(connectionSource);
+		} else {
+			CashFlowDao.createTable(connectionSource);
+		}
 		
 		try {
 			connectionSource.close();
@@ -32,8 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	private void deleteAllTable(SQLiteDatabase database) {
 		ConnectionSource connectionSource = new AndroidConnectionSource(database);
-		UserDao.deleteTable(connectionSource);
-		CashFlowDao.deleteTable(connectionSource);
+		
+		if(DB_TYPE == DATABASE_TYPE.USER_DB.ordinal()) {
+			UserDao.deleteTable(connectionSource);
+		} else {
+			CashFlowDao.deleteTable(connectionSource);
+		}
 		
 		try {
 			connectionSource.close();

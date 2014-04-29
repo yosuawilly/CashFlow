@@ -28,8 +28,11 @@
 	            android:text="Input Your First Fund"/>
 	        
 	        <EditText 
+	            android:id="@+id/firstFundEdit"
 	            style="@style/edit_theme"
 	            android:singleLine="true"
+	            android:maxLength="15"
+	            android:inputType="number"
 	            android:layout_margin="10dp" />
 	        
 	        <Button 
@@ -58,6 +61,7 @@
 	            android:text="Your Balance Now"/>
             
             <TextView 
+                android:id="@+id/balanceTV"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="10dp"

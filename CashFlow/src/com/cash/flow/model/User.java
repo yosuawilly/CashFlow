@@ -20,8 +20,11 @@ public class User {
 	@DatabaseField(dataType=DataType.STRING)
 	private String answer;
 	
+	@DatabaseField(dataType=DataType.LONG)
+	private long balance;
+	
 	public User() {
-		// TODO Auto-generated constructor stub
+		this.balance = 0L;
 	}
 
 	public String getUsername() {
@@ -54,6 +57,14 @@ public class User {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	
+	public long getBalance() {
+		return balance;
+	}
+	
+	public void setBalance(long balance) {
+		this.balance = balance;
 	}
 
 }

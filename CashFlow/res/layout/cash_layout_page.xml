@@ -28,11 +28,12 @@
 		        android:layout_weight="0.4"/>
 	     
 		    <EditText 
-		        android:id="@+id/usernameEdit"
+		        android:id="@+id/nominalEdit"
 		        style="@style/edit_theme"
 		        android:layout_width="0dp"
+		        android:inputType="number"
 		        android:singleLine="true"
-		        android:maxLength="20"
+		        android:maxLength="15"
 		        android:layout_weight="0.6"/>
 	    </LinearLayout>
 	    
@@ -49,16 +50,16 @@
 		        android:layout_weight="0.4"/>
 	     
 		    <EditText 
-		        android:id="@+id/passwordEdit"
+		        android:id="@+id/descriptionEdit"
 		        style="@style/edit_theme"
 		        android:layout_width="0dp"
 		        android:singleLine="true"
 		        android:maxLength="20"
-		        android:inputType="textPassword"
 		        android:layout_weight="0.6"/>
 	    </LinearLayout>
 	    
 	    <Button 
+	        android:id="@+id/button_save"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="5dp"

@@ -8,6 +8,7 @@
     <string name="message.passwordEmpty">Password must inserted</string>
     <string name="message.questionEmpty">Question must inserted</string>
     <string name="message.answerEmpty">Answer must inserted</string>
+    <string name="message.nominalEmpty">Nominal must inserted</string>
     
     <string name="message.usernamePasswordWrong">Username or Password Invalid</string>
     <string name="message.usernameNotFound">Username Not Found</string>
@@ -15,11 +16,35 @@
     <string name="message.allFieldRequired">All Field Required</string>
     <string name="message.oldPasswrodWrong">Old password is wrong</string>
     <string name="message.passwordMismatch">Old password and new password mismatch</string>
+    <string name="message.dataSaved">Data Saved</string>
+    
+    <string name="default.description">First Fund</string>
     
     <string-array name="security_questions">
         <item>Siapa nama depan ayah anda?</item>
         <item>Apa nama makanan favorit anda?</item>
         <item>Dimana anda dilahirkan?</item>
+    </string-array>
+    
+    <string-array name="report_type">
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    
+    <string-array name="month">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
     </string-array>
 
 </resources>

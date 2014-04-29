@@ -3,17 +3,10 @@ package com.cash.flow.database.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import android.content.Context;
-import com.cash.flow.database.DatabaseHelper;
-import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
 
 public class BaseDao<T, ID> extends BaseDaoImpl<T, ID>{
-	
-	public BaseDao(Context context, Class<T> dataClass) throws SQLException {
-		super(new AndroidConnectionSource(new DatabaseHelper(context)), dataClass);
-	}
 
 	public BaseDao(ConnectionSource connectionSource, Class<T> dataClass) throws SQLException {
 		super(connectionSource, dataClass);

@@ -7,8 +7,13 @@ public final class Constant {
 	
 	//public static final String BASE_URL = "http://192.168.16.90/TrackingPelabuhanServer/rest/";
 	
+	public static final String DB_USER_NAME="CashFlowUserDB";
 	public static final String DB_NAME="CashFlowDB";
 	public static final String DB_PATH="/data/data/com.cash.flow/databases/";
+	
+	public static final String SIMPLE_DATE_FORMAT = "E MMM dd ss:mm:HH z yyyy";
+	public static final String FORMAT_DATE_DDMMYYYY = "dd/MM/yyyy";
+	public static final String FORMAT_DATE_DDMMMMYYYY = "dd MMMM yyyy";
 	
 	/*Constant for restfull http request*/
 	public static final int REST_GET = 0;

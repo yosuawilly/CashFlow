@@ -5,15 +5,26 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.cash.flow.R;
+import com.cash.flow.model.CashFlow;
+import com.cash.flow.model.CashFlow.CashType;
+import com.cash.flow.util.NominalFormatter;
+import com.cash.flow.util.NumberUtil;
+import com.cash.flow.util.Utility;
 
 @SuppressLint("ValidFragment")
-public class CashOutFragment extends SherlockFragment{
+public class CashOutFragment extends SherlockFragment implements OnClickListener{
 	
 	private Context context;
 	private ViewGroup viewGroup;
+	
+	private EditText nominalEdit;
+	private EditText descriptionEdit;
 	
 	public CashOutFragment(Context context) {
 		this.context = context;
@@ -36,6 +47,12 @@ public class CashOutFragment extends SherlockFragment{
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		nominalEdit = (EditText) viewGroup.findViewById(R.id.nominalEdit);
+		descriptionEdit = (EditText) viewGroup.findViewById(R.id.descriptionEdit);
+		
+		NominalFormatter.setTextNominalListener(nominalEdit);
+		
+		viewGroup.findViewById(R.id.button_save).setOnClickListener(this);
 	}
 	
 	@Override
@@ -45,6 +62,30 @@ public class CashOutFragment extends SherlockFragment{
 			ViewGroup container = (ViewGroup) viewGroup.getParent();
 			if(container!=null) {
 				container.removeView(viewGroup);
+			}
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v.getId() == R.id.button_save) {
+			String nominal = NumberUtil.normalizeNumber(nominalEdit.getText().toString().trim());
+			String description = descriptionEdit.getText().toString().trim();
+			
+			if(nominal.equals("") || description.equals("")) {
+				Utility.showMessage(context, "Close", context.getString(R.string.message_allFieldRequired));
+			} else {
+				CashFlow cashFlow = new CashFlow();
+				cashFlow.setNominal(Long.parseLong(nominal));
+				cashFlow.setDescription(description);
+				cashFlow.setTypeCash(CashType.CASH_OUT);
+				
+				Utility.saveCashFlow(context, cashFlow);
+				
+				nominalEdit.setText("");
+				descriptionEdit.setText("");
+				
+				Utility.showMessage(context, context.getString(R.string.message_dataSaved));
 			}
 		}
 	}

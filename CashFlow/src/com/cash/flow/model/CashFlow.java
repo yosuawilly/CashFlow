@@ -25,6 +25,9 @@ public class CashFlow {
 	@DatabaseField(dataType=DataType.ENUM_STRING)
 	private CashType typeCash;
 	
+	@DatabaseField(dataType=DataType.LONG)
+	private long balance;
+	
 	public static enum CashType {
 		CASH_IN ("Cash In"),
 		CASH_OUT ("Cash Out");
@@ -47,7 +50,7 @@ public class CashFlow {
 	}
 	
 	public CashFlow() {
-		// TODO Auto-generated constructor stub
+		this.timestamp = new Date();
 	}
 	
 //	public int getId() {
@@ -88,6 +91,14 @@ public class CashFlow {
 
 	public void setTypeCash(CashType typeCash) {
 		this.typeCash = typeCash;
+	}
+	
+	public long getBalance() {
+		return balance;
+	}
+	
+	public void setBalance(long balance) {
+		this.balance = balance;
 	}
 
 }

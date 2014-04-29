@@ -5,20 +5,31 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cash.flow.R;
+import com.cash.flow.activity.MainMenuActivity;
+import com.cash.flow.database.dao.CashFlowDao;
+import com.cash.flow.database.dao.UserDao;
+import com.cash.flow.global.GlobalVar;
 import com.cash.flow.listener.DialogListener;
+import com.cash.flow.model.CashFlow;
+import com.cash.flow.model.CashFlow.CashType;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.DatePicker;
 
 public class Utility {
 	
@@ -200,6 +211,40 @@ public class Utility {
 	        catch (InvocationTargetException e) {}
 	        catch (IllegalAccessException e) {}
 	        catch (IllegalArgumentException e) {}
+	}
+	
+	@SuppressLint("NewApi") 
+	public static void ShowDatePicker(Context context, DatePickerDialog.OnDateSetListener dateSetListener){
+		Calendar calendar = Calendar.getInstance();
+		DatePickerDialog dialog = new DatePickerDialog(context, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		if(android.os.Build.VERSION.SDK_INT >= 11){
+			dialog.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+			dialog.getDatePicker().setCalendarViewShown(false);
+		}
+		
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.show();
+	}
+	
+	public static void saveCashFlow(Context context, CashFlow cashFlow) {
+		if(cashFlow.getTypeCash().equals(CashType.CASH_IN)) {
+			GlobalVar.getInstance().getUser().setBalance(GlobalVar.getInstance().getUser().getBalance() + cashFlow.getNominal());
+		} else {
+			GlobalVar.getInstance().getUser().setBalance(GlobalVar.getInstance().getUser().getBalance() - cashFlow.getNominal());
+		}
+		
+		cashFlow.setBalance(GlobalVar.getInstance().getUser().getBalance());
+		
+		CashFlowDao cashFlowDao = CashFlowDao.getInstance(context);
+		cashFlowDao.createData(cashFlow);
+		
+		UserDao userDao = UserDao.getInstance(context);
+		userDao.updateData(GlobalVar.getInstance().getUser());
+		
+		cashFlowDao.closeConnection();
+		userDao.closeConnection();
+		
+		context.sendBroadcast(new Intent(MainMenuActivity.REFRESH_ACTION));
 	}
 
 }

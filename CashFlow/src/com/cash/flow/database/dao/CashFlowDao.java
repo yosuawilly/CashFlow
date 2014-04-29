@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.cash.flow.database.DatabaseHelper;
+import com.cash.flow.database.DatabaseHelper.DATABASE_TYPE;
 import com.cash.flow.model.CashFlow;
 import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
@@ -15,7 +16,7 @@ public class CashFlowDao extends BaseDao<CashFlow, Integer>{
 	private static final String TAG = CashFlowDao.class.getSimpleName();
 	
 	public CashFlowDao(Context context) throws SQLException {
-		super(new AndroidConnectionSource(new DatabaseHelper(context)), CashFlow.class);
+		super(new AndroidConnectionSource(new DatabaseHelper(context, DATABASE_TYPE.CASHFLOW_DB)), CashFlow.class);
 	}
 
 	public CashFlowDao(ConnectionSource connectionSource) throws SQLException {
