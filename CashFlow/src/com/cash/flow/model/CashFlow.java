@@ -19,7 +19,7 @@ public class CashFlow {
 	@DatabaseField(dataType=DataType.STRING)
 	private String description;
 	
-	@DatabaseField
+	@DatabaseField(dataType=DataType.DATE_LONG) //for compare with query between
 	private Date timestamp;
 	
 	@DatabaseField(dataType=DataType.ENUM_STRING)

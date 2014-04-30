@@ -178,12 +178,100 @@
             android:background="@drawable/form_sparator" />
 
         <Button
+            android:id="@+id/buttonShowCashFlow"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/green_button_gradient"
             android:text="Show"
             android:textColor="@color/white" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp" >
+        
+        <TableLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray">
+            <TableRow 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="1dp"
+                android:paddingTop="1dp">
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/grey_gradient"
+                    android:text="Date"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"/>
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/grey_gradient"
+                    android:text="CashIn"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"/>
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/grey_gradient"
+                    android:text="CashOut"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"/>
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/grey_gradient"
+                    android:text="Description"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1.6"/>
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/grey_gradient"
+                    android:text="Balance"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1.3"/>
+            </TableRow>
+        </TableLayout>
+        
+        <ListView 
+            android:id="@+id/listCashFlow"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+            
+        </ListView>
+        
     </LinearLayout>
 
 </LinearLayout>

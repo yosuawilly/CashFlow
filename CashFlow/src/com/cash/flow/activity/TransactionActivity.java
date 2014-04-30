@@ -5,7 +5,9 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -16,7 +18,7 @@ import com.cash.flow.customcomponent.CustomViewPager;
 import com.cash.flow.util.TabSetupTools;
 import com.cash.flow.util.TabSetupTools.OnTabChanged;
 
-public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged{
+public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged, OnClickListener{
 	
 	private String[] tabs = { "Cash In", "Cash Out", "Summary" };
 	
@@ -26,6 +28,8 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 	
 	private boolean changeFromPager = false;
 	private boolean changeFromTab = false;
+	
+	private Button exportButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,10 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 		viewPager.setOnPageChangeListener(this);
 		viewPager.setEnableSwipe(true);
 		viewPager.setAdapter(fragmentAdapter);
+		
+		exportButton = (Button) findViewById(R.id.next_button);
+		exportButton.setText("Export");
+		exportButton.setOnClickListener(this);
 		
 		/*init actionbar*/
 		/*getMyActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -150,6 +158,11 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 		changeFromPager = true;
 		tabSetupTools.setSelectedTab(position);
 		//getMyActionBar().setSelectedNavigationItem(position);
+		if(position == 2) {
+			exportButton.setVisibility(View.VISIBLE);
+		} else {
+			exportButton.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	@Override
@@ -162,10 +175,20 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 		changeFromTab = true;
 		if(tabId.equals(tabs[0])) {
 			viewPager.setCurrentItem(0);
+			exportButton.setVisibility(View.INVISIBLE);
 		} else if(tabId.equals(tabs[1])) {
 			viewPager.setCurrentItem(1);
+			exportButton.setVisibility(View.INVISIBLE);
 		} else if(tabId.equals(tabs[2])) {
 			viewPager.setCurrentItem(2);
+			exportButton.setVisibility(View.VISIBLE);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v.getId() == exportButton.getId()) {
+			
 		}
 	}
 

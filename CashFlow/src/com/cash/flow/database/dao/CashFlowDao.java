@@ -1,6 +1,9 @@
 package com.cash.flow.database.dao;
 
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -8,6 +11,7 @@ import com.cash.flow.database.DatabaseHelper;
 import com.cash.flow.database.DatabaseHelper.DATABASE_TYPE;
 import com.cash.flow.model.CashFlow;
 import com.j256.ormlite.android.AndroidConnectionSource;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -52,6 +56,20 @@ public class CashFlowDao extends BaseDao<CashFlow, Integer>{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public List<CashFlow> findByDate(Date fromDate, Date toDate) {
+		QueryBuilder<CashFlow, Integer> builder = this.queryBuilder();
+		List<CashFlow> cashFlows = null;
+		
+		try {
+			builder.where().between("timestamp", fromDate, toDate);
+			cashFlows = builder.query();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cashFlows;
 	}
 
 }

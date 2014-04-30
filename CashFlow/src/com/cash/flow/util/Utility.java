@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -214,8 +215,14 @@ public class Utility {
 	}
 	
 	@SuppressLint("NewApi") 
-	public static void ShowDatePicker(Context context, DatePickerDialog.OnDateSetListener dateSetListener){
+	public static void showDatePicker(Context context, DatePickerDialog.OnDateSetListener dateSetListener){
+		showDatePicker(context, null, dateSetListener);
+	}
+	
+	@SuppressLint("NewApi") 
+	public static void showDatePicker(Context context, Date date, DatePickerDialog.OnDateSetListener dateSetListener){
 		Calendar calendar = Calendar.getInstance();
+		if(date != null) calendar.setTime(date);
 		DatePickerDialog dialog = new DatePickerDialog(context, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 		if(android.os.Build.VERSION.SDK_INT >= 11){
 			dialog.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);

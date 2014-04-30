@@ -23,8 +23,12 @@ public class User {
 	@DatabaseField(dataType=DataType.LONG)
 	private long balance;
 	
+	@DatabaseField(dataType=DataType.LONG)
+	private long margin;
+	
 	public User() {
 		this.balance = 0L;
+		this.margin = 0L;
 	}
 
 	public String getUsername() {
@@ -65,6 +69,14 @@ public class User {
 	
 	public void setBalance(long balance) {
 		this.balance = balance;
+	}
+	
+	public long getMargin() {
+		return margin;
+	}
+	
+	public void setMargin(long margin) {
+		this.margin = margin;
 	}
 
 }

@@ -82,6 +82,13 @@ public class CustomKeyBoard extends LinearLayout  implements OnClickListener{
 		this.editText.setInputType(InputType.TYPE_NULL);
 		//this.length = length;
 	}
+	
+	public void initCustomKeyboard(EditText editText, String text) {
+		this.editText = editText;
+		this.editText.setInputType(InputType.TYPE_NULL);
+		this.text = text;
+		//this.length = length;
+	}
 
 	@Override
 	public void onClick(View v) {

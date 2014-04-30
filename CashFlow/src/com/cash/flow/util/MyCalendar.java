@@ -135,6 +135,13 @@ public class MyCalendar{
 		return "";
 	}
 	
+	public static Date getPlusDate(Date date, int plus) {
+		Calendar calendar = Calendar.getInstance(new Locale("in", "ID"));
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, plus);
+		return calendar.getTime();
+	}
+	
 	public static String parseLocaleDate(Date date, String format){
 		Locale locale = new Locale("in", "ID");
 		SimpleDateFormat sdf = new SimpleDateFormat(format, locale);	
