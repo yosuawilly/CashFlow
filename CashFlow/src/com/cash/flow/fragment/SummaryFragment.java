@@ -48,7 +48,6 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	
 	private ListView listCashFlow;
 	private CashFlowListAdapter listAdapter;
-	private List<CashFlow> cashFlows;
 	
 	public SummaryFragment(Context context) {
 		this.context = context;
@@ -146,14 +145,14 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		CashFlowDao.clearAllInternalObjectCaches();
 		CashFlowDao cashFlowDao = CashFlowDao.getInstance(context);
 		cashFlowDao.clearObjectCache();
-		cashFlows = cashFlowDao.findByDate(fromDate, toDate);
+		List<CashFlow> cashFlows = cashFlowDao.findByDate(fromDate, toDate);
 		
 		Log.i("lengthData", String.valueOf(cashFlows.size()));
 		
-		if(listAdapter == null) {
-			listAdapter = new CashFlowListAdapter(context, cashFlows);
-			listCashFlow.setAdapter(listAdapter);
-		} else {
+		listAdapter = new CashFlowListAdapter(context, cashFlows);
+		listCashFlow.setAdapter(listAdapter);
+		
+		if(listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
 		}
 		
@@ -190,6 +189,11 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		case R.id.buttonShowCashFlow:
 			switch (spinnerType.getSelectedItemPosition()) {
 			case 0: //weekly
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(toDate);
+				Calendar calendar2 = Calendar.getInstance();
+				calendar2.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+				toDate = calendar2.getTime();
 				buildListCashFlow(fromDate, toDate);
 				break;
 			case 1: //monthly
