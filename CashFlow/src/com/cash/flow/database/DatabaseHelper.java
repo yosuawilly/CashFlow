@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public DatabaseHelper(Context context, DATABASE_TYPE type) {
-		super(context, type.equals(DATABASE_TYPE.USER_DB) ? Constant.DB_USER_NAME : Constant.DB_NAME, null, 1);
+		super(context, type.equals(DATABASE_TYPE.USER_DB) ? Constant.DB_USER_NAME : Constant.DB_NAME, null, Constant.DB_VERSION);
 		this.DB_TYPE = type.ordinal();
 	}
 	

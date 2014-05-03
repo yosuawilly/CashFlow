@@ -7,6 +7,7 @@ public final class Constant {
 	
 	//public static final String BASE_URL = "http://192.168.16.90/TrackingPelabuhanServer/rest/";
 	
+	public static final int DB_VERSION = 1;
 	public static final String DB_USER_NAME="CashFlowUserDB";
 	public static final String DB_NAME="CashFlowDB";
 	public static final String DB_PATH="/data/data/com.cash.flow/databases/";

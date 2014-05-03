@@ -164,7 +164,7 @@ public class MyActivity<T extends Activity> implements Functional, OnClickListen
 			}
 			break;
 		case R.id.logout_button:
-			Utility.showConfirmMessage(activity, "Logout", "Apakah anda yakin akan logout?", new DialogListener() {
+			Utility.showConfirmMessage(activity, "Logout", activity.getString(R.string.message_logout), new DialogListener() {
 				@Override
 				public void onDialogClose() {
 					GlobalVar.getInstance().clearAllObject();

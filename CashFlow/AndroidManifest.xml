@@ -34,42 +34,51 @@
         </activity>
         <activity
             android:name="com.cash.flow.activity.EmptyActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.ActivationActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.LoginActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.setting.ChangePasswordActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.setting.ForgotPasswordActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.setting.SetMarginActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.MainMenuActivity"
             android:theme="@style/app_theme_with_action_bar"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.TransactionActivity"
             android:theme="@style/app_theme_with_action_bar"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.cash.flow.activity.SettingActivity"
             android:theme="@style/app_theme_with_action_bar"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

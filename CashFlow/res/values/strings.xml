@@ -9,6 +9,7 @@
     <string name="message.questionEmpty">Question must inserted</string>
     <string name="message.answerEmpty">Answer must inserted</string>
     <string name="message.nominalEmpty">Nominal must inserted</string>
+    <string name="message.yearEmpty">Year must inserted</string>
     
     <string name="message.usernamePasswordWrong">Username or Password Invalid</string>
     <string name="message.usernameNotFound">Username Not Found</string>
@@ -17,6 +18,8 @@
     <string name="message.oldPasswrodWrong">Old password is wrong</string>
     <string name="message.passwordMismatch">Old password and new password mismatch</string>
     <string name="message.dataSaved">Data Saved</string>
+    
+    <string name="message.logout">Are you sure want to logout?</string>
     
     <string name="default.description">First Fund</string>
     

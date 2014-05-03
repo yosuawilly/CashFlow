@@ -2,6 +2,7 @@ package com.cash.flow.fragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -43,6 +45,8 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	private LinearLayout weeklyLayout, monthlyLayout, onlyMonthLayout;
 	
 	private TextView toDateTV, fromDateTV;
+	
+	private EditText yearEdit;
 	
 	private Date fromDate, toDate;
 	
@@ -83,6 +87,8 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		this.toDate = new Date();
 		fromDateTV.setText(MyCalendar.parseLocaleDate(fromDate, Constant.FORMAT_DATE_DDMMMMYYYY));
 		toDateTV.setText(MyCalendar.parseLocaleDate(toDate, Constant.FORMAT_DATE_DDMMMMYYYY));
+		
+		yearEdit = (EditText) monthlyLayout.findViewById(R.id.yearEdit);
 		
 		typeAdapter = new ArrayAdapter<String>(context, R.layout.custom_spinner_component, 
 				getResources().getStringArray(R.array.report_type));
@@ -151,10 +157,7 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		
 		listAdapter = new CashFlowListAdapter(context, cashFlows);
 		listCashFlow.setAdapter(listAdapter);
-		
-		if(listAdapter != null) {
-			listAdapter.notifyDataSetChanged();
-		}
+		listAdapter.notifyDataSetChanged();
 		
 		cashFlowDao.closeConnection();
 	}
@@ -187,19 +190,59 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 			});
 			break;
 		case R.id.buttonShowCashFlow:
+			String yearStr = "";
+			Calendar from = null, toCal = null;
+			Date to = null;
+			
 			switch (spinnerType.getSelectedItemPosition()) {
 			case 0: //weekly
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(toDate);
-				Calendar calendar2 = Calendar.getInstance();
-				calendar2.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
-				toDate = calendar2.getTime();
+//				Calendar calendar = Calendar.getInstance();
+//				calendar.setTime(toDate);
+//				Calendar calendar2 = Calendar.getInstance();
+//				calendar2.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+//				toDate = calendar2.getTime();
+				toDate = MyCalendar.resetDate(toDate);
 				buildListCashFlow(fromDate, toDate);
 				break;
 			case 1: //monthly
+				yearStr = yearEdit.getText().toString().trim();
+				if(yearStr.equals("")) {
+					Utility.showMessage(context, "Close", context.getString(R.string.message_yearEmpty));
+					return;
+				}
+				
+				int month = spinnerMonth.getSelectedItemPosition();
+				from = Calendar.getInstance();
+				from.set(Integer.parseInt(yearStr), month, 1, 0, 0, 0);
+				from.set(Calendar.MILLISECOND, 0);
+				
+				toCal = new GregorianCalendar(Integer.parseInt(yearStr), month+1, 0);
+				to = MyCalendar.getEndOfDay(toCal.getTime());
+				
+				Log.i("from", from.getTime().toString());
+				Log.i("to", to.toString());
+				
+				buildListCashFlow(from.getTime(), to);
 				
 				break;
 			case 2: //yearly
+				yearStr = yearEdit.getText().toString().trim();
+				if(yearStr.equals("")) {
+					Utility.showMessage(context, "Close", context.getString(R.string.message_yearEmpty));
+					return;
+				}
+				
+				from = Calendar.getInstance();
+				from.set(Integer.parseInt(yearStr), 0, 1, 0, 0, 0);
+				from.set(Calendar.MILLISECOND, 0);
+				
+				toCal = new GregorianCalendar(Integer.parseInt(yearStr), 12, 0);
+				to = MyCalendar.getEndOfDay(toCal.getTime());
+				
+				Log.i("from", from.getTime().toString());
+				Log.i("to", to.toString());
+				
+				buildListCashFlow(from.getTime(), to);
 				
 				break;
 			default:

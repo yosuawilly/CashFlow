@@ -54,6 +54,8 @@ public class LoginActivity extends Activity implements OnClickListener{
 			} else {
 				UserDao userDao = UserDao.getInstance(this);
 				User user = userDao.findUser(username);
+				userDao.closeConnection();
+				
 				if(user == null) {
 					Utility.showMessage(this, "Close", getString(R.string.message_usernamePasswordWrong));
 					return;

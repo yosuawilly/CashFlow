@@ -158,4 +158,23 @@ public class MyCalendar{
 		return parseLocaleDate;
 	}
 	
+	public static Date resetDate(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+		date = calendar2.getTime();
+		return date;
+	}
+	
+	public static Date getEndOfDay(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+	    calendar.set(Calendar.MINUTE,      calendar.getMaximum(Calendar.MINUTE));
+	    calendar.set(Calendar.SECOND,      calendar.getMaximum(Calendar.SECOND));
+	    calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
+	    return calendar.getTime();
+	}
+	
 }

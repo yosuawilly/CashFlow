@@ -18,30 +18,13 @@ import android.widget.TextView;
 
 public class CashFlowListAdapter extends ArrayAdapter<CashFlow>{
 	
-	//List<CashFlow> cashFlows;
-	
 	public CashFlowListAdapter(Context context) {
 		super(context, R.layout.cash_flow_row_component);
 	}
 
 	public CashFlowListAdapter(Context context, List<CashFlow> objects) {
 		super(context, R.layout.cash_flow_row_component, objects);
-		//this.cashFlows = objects;
 	}
-	
-//	public void setCashFlows(List<CashFlow> cashFlows) {
-//		this.cashFlows = cashFlows;
-//	}
-//	
-//	@Override
-//	public CashFlow getItem(int position) {
-//		return cashFlows.get(position);
-//	}
-//	
-//	@Override
-//	public int getCount() {
-//		return cashFlows.size();
-//	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
