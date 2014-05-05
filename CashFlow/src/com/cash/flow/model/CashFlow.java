@@ -1,5 +1,6 @@
 package com.cash.flow.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cash.flow.database.dao.CashFlowDao;
@@ -8,18 +9,20 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "t_cash_flow", daoClass=CashFlowDao.class)
-public class CashFlow {
+public class CashFlow implements Serializable{
+	
+	private static final long serialVersionUID = -289037265889693689L;
 	
 	//@DatabaseField(generatedId=true)
 	//private int id;
-	
+
 	@DatabaseField(dataType=DataType.LONG)
 	private long nominal;
 	
 	@DatabaseField(dataType=DataType.STRING)
 	private String description;
 	
-	@DatabaseField(dataType=DataType.DATE_LONG) //for compare with query between
+	@DatabaseField(id=true, dataType=DataType.DATE_LONG) //for compare with query between
 	private Date timestamp;
 	
 	@DatabaseField(dataType=DataType.ENUM_STRING)

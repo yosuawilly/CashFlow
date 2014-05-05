@@ -18,6 +18,7 @@
     <string name="message.oldPasswrodWrong">Old password is wrong</string>
     <string name="message.passwordMismatch">Old password and new password mismatch</string>
     <string name="message.dataSaved">Data Saved</string>
+    <string name="message.noLastTransaction">Not exist last transaction</string>
     
     <string name="message.logout">Are you sure want to logout?</string>
     

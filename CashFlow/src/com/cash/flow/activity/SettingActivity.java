@@ -8,9 +8,13 @@ import android.widget.ListView;
 import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowListActivity;
 import com.cash.flow.activity.setting.ChangePasswordActivity;
+import com.cash.flow.activity.setting.EditLastTransActivity;
 import com.cash.flow.activity.setting.SetMarginActivity;
 import com.cash.flow.adapter.MenuListAdapter;
+import com.cash.flow.database.dao.CashFlowDao;
+import com.cash.flow.model.CashFlow;
 import com.cash.flow.util.Constant;
+import com.cash.flow.util.Utility;
 
 public class SettingActivity extends BaseCashFlowListActivity{
 	
@@ -25,11 +29,13 @@ public class SettingActivity extends BaseCashFlowListActivity{
 		buildDefaultList(new String[]{
 				"Change Password",
 				"Set Margin",
-				"Currency"
+				"Currency",
+				"Edit Last Transaction"
 		}, new int[]{
 				R.drawable.change_password_icon,
 				R.drawable.coins,
-				R.drawable.dollars
+				R.drawable.dollars,
+				R.drawable.edit
 		});
 	}
 	
@@ -45,6 +51,19 @@ public class SettingActivity extends BaseCashFlowListActivity{
 			startActivityForResult(intent, Constant.START_ACTIVITY);
 		} else if("Currency".equals(item)) {
 			
+		} else if("Edit Last Transaction".equals(item)) {
+			CashFlowDao cashFlowDao = CashFlowDao.getInstance(this);
+			CashFlow lastCash = cashFlowDao.findLastTransaction();
+			cashFlowDao.closeConnection();
+			
+			if(lastCash == null) {
+				Utility.showMessage(this, getString(R.string.message_noLastTransaction));
+				return;
+			}
+			
+			Intent intent = new Intent(this, EditLastTransActivity.class);
+			intent.putExtra("cashflow", lastCash);
+			startActivityForResult(intent, Constant.START_ACTIVITY);
 		}
 	}
 

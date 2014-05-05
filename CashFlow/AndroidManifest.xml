@@ -63,6 +63,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.cash.flow.activity.setting.EditLastTransActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.cash.flow.activity.MainMenuActivity"
             android:theme="@style/app_theme_with_action_bar"
             android:configChanges="keyboardHidden|orientation"

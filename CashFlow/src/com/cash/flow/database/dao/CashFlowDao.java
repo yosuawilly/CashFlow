@@ -71,5 +71,34 @@ public class CashFlowDao extends BaseDao<CashFlow, Integer>{
 		
 		return cashFlows;
 	}
+	
+	public CashFlow findLastTransaction() {
+		CashFlow cashFlow = new CashFlow();
+		QueryBuilder<CashFlow, Integer> builder = this.queryBuilder();
+		builder.orderBy("timestamp", false).limit(1L);
+		
+		try {
+			cashFlow = builder.queryForFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cashFlow;
+	}
+	
+	public CashFlow findCashFlowBefore(CashFlow cashFlow) {
+		CashFlow cashBefore = new CashFlow();
+		QueryBuilder<CashFlow, Integer> builder = this.queryBuilder();
+		
+		try {
+			builder.where().lt("timestamp", cashFlow.getTimestamp());
+			builder.orderBy("timestamp", false).limit(1L);
+			cashBefore = builder.queryForFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cashBefore;
+	}
 
 }

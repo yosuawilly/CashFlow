@@ -253,5 +253,34 @@ public class Utility {
 		
 		context.sendBroadcast(new Intent(MainMenuActivity.REFRESH_ACTION));
 	}
+	
+	public static void updateCashFlow(Context context, CashFlow cashFlow) {
+		CashFlowDao cashFlowDao = CashFlowDao.getInstance(context);
+		UserDao userDao = UserDao.getInstance(context);
+		
+		CashFlow cashBefore = cashFlowDao.findCashFlowBefore(cashFlow);
+		
+		if(cashBefore != null) {
+			if(cashFlow.getTypeCash().equals(CashType.CASH_IN)) {
+				cashFlow.setBalance(cashBefore.getBalance() + cashFlow.getNominal());
+			} else {
+				cashFlow.setBalance(cashBefore.getBalance() - cashFlow.getNominal());
+			}
+			
+			GlobalVar.getInstance().getUser().setBalance(cashFlow.getBalance());
+			
+		} else {
+			cashFlow.setBalance(cashFlow.getNominal());
+			GlobalVar.getInstance().getUser().setBalance(cashFlow.getBalance());
+		}
+		
+		cashFlowDao.updateData(cashFlow);
+		userDao.updateData(GlobalVar.getInstance().getUser());
+		
+		cashFlowDao.closeConnection();
+		userDao.closeConnection();
+		
+		context.sendBroadcast(new Intent(MainMenuActivity.REFRESH_ACTION));
+	}
 
 }
