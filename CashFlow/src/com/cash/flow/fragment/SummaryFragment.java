@@ -1,5 +1,6 @@
 package com.cash.flow.fragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -50,6 +51,7 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	
 	private Date fromDate, toDate;
 	
+	List<CashFlow> cashFlows = new ArrayList<CashFlow>();
 	private ListView listCashFlow;
 	private CashFlowListAdapter listAdapter;
 	
@@ -151,7 +153,8 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		CashFlowDao.clearAllInternalObjectCaches();
 		CashFlowDao cashFlowDao = CashFlowDao.getInstance(context);
 		cashFlowDao.clearObjectCache();
-		List<CashFlow> cashFlows = cashFlowDao.findByDate(fromDate, toDate);
+		//List<CashFlow> cashFlows = cashFlowDao.findByDate(fromDate, toDate);
+		cashFlows = cashFlowDao.findByDate(fromDate, toDate);
 		
 		Log.i("lengthData", String.valueOf(cashFlows.size()));
 		
@@ -160,6 +163,10 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		listAdapter.notifyDataSetChanged();
 		
 		cashFlowDao.closeConnection();
+	}
+	
+	public List<CashFlow> getCashFlows() {
+		return cashFlows;
 	}
 
 	@Override

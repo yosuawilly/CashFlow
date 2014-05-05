@@ -1,5 +1,7 @@
 package com.cash.flow.activity;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
@@ -15,10 +17,16 @@ import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowActivity;
 import com.cash.flow.adapter.FragmentAdapter;
 import com.cash.flow.customcomponent.CustomViewPager;
+import com.cash.flow.fragment.SummaryFragment;
+import com.cash.flow.model.CashFlow;
+import com.cash.flow.task.ExportDataToExcelTask;
+import com.cash.flow.task.TaskCompleteListener;
 import com.cash.flow.util.TabSetupTools;
 import com.cash.flow.util.TabSetupTools.OnTabChanged;
 
-public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged, OnClickListener{
+public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged, OnClickListener, TaskCompleteListener{
+	
+	private final int EXPORT_DATA = 11;
 	
 	private String[] tabs = { "Cash In", "Cash Out", "Summary" };
 	
@@ -188,8 +196,17 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == exportButton.getId()) {
+			List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
 			
+			ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(this, this, "Exporting data ...", EXPORT_DATA);
+			dataToExcelTask.setCashFlows(cashFlows);
+			dataToExcelTask.execute("data");
 		}
+	}
+
+	@Override
+	public void onTaskComplete(Integer idCaller, boolean sukses, String errorMessage) {
+		
 	}
 
 }
