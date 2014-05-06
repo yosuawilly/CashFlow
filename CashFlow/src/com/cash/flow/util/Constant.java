@@ -15,6 +15,7 @@ public final class Constant {
 	public static final String SIMPLE_DATE_FORMAT = "E MMM dd ss:mm:HH z yyyy";
 	public static final String FORMAT_DATE_DDMMYYYY = "dd/MM/yyyy";
 	public static final String FORMAT_DATE_DDMMMMYYYY = "dd MMMM yyyy";
+	public static final String FORMAT_DATE_DDMMYYYY_HMS = "dd/MM/yyyy HH:mm:ss";
 	
 	/*Constant for restfull http request*/
 	public static final int REST_GET = 0;

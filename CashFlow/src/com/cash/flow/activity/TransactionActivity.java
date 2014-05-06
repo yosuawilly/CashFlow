@@ -2,6 +2,7 @@ package com.cash.flow.activity;
 
 import java.util.List;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -23,8 +25,10 @@ import com.cash.flow.task.ExportDataToExcelTask;
 import com.cash.flow.task.TaskCompleteListener;
 import com.cash.flow.util.TabSetupTools;
 import com.cash.flow.util.TabSetupTools.OnTabChanged;
+import com.cash.flow.util.Utility;
 
-public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged, OnClickListener, TaskCompleteListener{
+public class TransactionActivity extends BaseCashFlowActivity implements OnPageChangeListener, OnTabChanged, 
+OnClickListener, TaskCompleteListener{
 	
 	private final int EXPORT_DATA = 11;
 	
@@ -196,17 +200,50 @@ public class TransactionActivity extends BaseCashFlowActivity implements OnPageC
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == exportButton.getId()) {
-			List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
+			final Dialog dialog = new Dialog(this);
+			dialog.setContentView(R.layout.input_file_name_layout);
+			dialog.setTitle("Export Report");
 			
-			ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(this, this, "Exporting data ...", EXPORT_DATA);
-			dataToExcelTask.setCashFlows(cashFlows);
-			dataToExcelTask.execute("data");
+			final EditText fileNameEdit = (EditText) dialog.findViewById(R.id.fileNameEdit);
+			
+			dialog.findViewById(R.id.buttonExport).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String fileName = fileNameEdit.getText().toString().trim();
+					if(fileName.equals("")) {
+						Utility.showMessage(TransactionActivity.this, TransactionActivity.this.getString(R.string.message_fileNameRequired));
+					} else {
+						List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
+						
+						ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(TransactionActivity.this, TransactionActivity.this, 
+								"Exporting data ...", EXPORT_DATA);
+						dataToExcelTask.setCashFlows(cashFlows);
+						dataToExcelTask.execute(fileName);
+						
+						dialog.dismiss();
+					}
+				}
+			});
+			
+			dialog.findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+			
+			dialog.show();
+			
 		}
 	}
 
 	@Override
 	public void onTaskComplete(Integer idCaller, boolean sukses, String errorMessage) {
-		
+		if(!sukses) {
+			Utility.showErrorMessage(this, errorMessage);
+		} else {
+			Utility.showMessage(this, getString(R.string.message_reportSuksesGenerated));
+		}
 	}
 
 }
