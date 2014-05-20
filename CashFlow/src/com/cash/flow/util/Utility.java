@@ -67,13 +67,25 @@ public class Utility {
 	
 	public static void showConfirmMessage(Context context, String title, String pesan, final DialogListener listener){
 		new AlertDialog.Builder(context).setMessage(pesan)
-		.setTitle(title).setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+		.setTitle(title).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface d, int i) {
 				d.dismiss();
 				listener.onDialogClose();
 			}
-		}).setNegativeButton("Tidak", null).create().show();
+		}).setNegativeButton("No", null).create().show();
+	}
+	
+	public static void showConfirmMessage(Context context, String title, String pesan, String positiveButton, 
+			String negativeButton, final DialogListener listener){
+		new AlertDialog.Builder(context).setMessage(pesan)
+		.setTitle(title).setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface d, int i) {
+				d.dismiss();
+				listener.onDialogClose();
+			}
+		}).setNegativeButton(negativeButton, null).create().show();
 	}
 	
 	public static void showErrorMessage(Context context, String pesan){

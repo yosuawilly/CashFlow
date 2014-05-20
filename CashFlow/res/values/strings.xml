@@ -19,8 +19,9 @@
     <string name="message.passwordMismatch">Old password and new password mismatch</string>
     <string name="message.dataSaved">Data Saved</string>
     <string name="message.noLastTransaction">Not exist last transaction</string>
-    <string name="message.reportSuksesGenerated">Report sukses generated</string>
+    <string name="message.reportSuksesGenerated">Report generated to {0}\n\nDo you want to show file?</string>
     <string name="message.fileNameRequired">Filename required</string>
+    <string name="message.fileExist">File is exist, do you want to replace?</string>
     
     <string name="message.logout">Are you sure want to logout?</string>
     

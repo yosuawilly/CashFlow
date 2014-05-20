@@ -41,7 +41,7 @@
 	            android:layout_height="wrap_content"
 	            android:background="@drawable/button_blue_selector"
 	            android:textColor="@color/white"
-	            android:text="Simpan"/>
+	            android:text="Save"/>
             
         </LinearLayout>
         

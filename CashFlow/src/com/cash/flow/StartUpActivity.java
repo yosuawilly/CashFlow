@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.cash.flow.activity.ActivationActivity;
 import com.cash.flow.activity.LoginActivity;
+import com.cash.flow.activity.MainMenuActivity;
 import com.cash.flow.database.dao.UserDao;
+import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.User;
+import com.cash.flow.util.Constant;
+import com.cash.flow.util.PreferenceHelper;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +25,16 @@ public class StartUpActivity extends Activity {
         UserDao userDao = UserDao.getInstance(this);
         final List<User> users = userDao.findAll();
         userDao.closeConnection();
+        
+        boolean isLogin = new PreferenceHelper(StartUpActivity.this).getBoolean(Constant.LOGIN_STATUS);
+        if(users.size() > 0)
+		if(isLogin) {
+			User user = users.get(0);
+			GlobalVar.getInstance().setUser(user);
+			startActivity(new Intent(StartUpActivity.this, MainMenuActivity.class));
+			finish();
+			return;
+		}
         
         Thread timer = new Thread(){
 			

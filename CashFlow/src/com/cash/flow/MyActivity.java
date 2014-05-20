@@ -18,6 +18,7 @@ import com.cash.flow.global.GlobalVar;
 import com.cash.flow.listener.DialogListener;
 import com.cash.flow.util.Constant;
 import com.cash.flow.util.Functional;
+import com.cash.flow.util.PreferenceHelper;
 import com.cash.flow.util.Utility;
 
 public class MyActivity<T extends Activity> implements Functional, OnClickListener{
@@ -168,6 +169,7 @@ public class MyActivity<T extends Activity> implements Functional, OnClickListen
 				@Override
 				public void onDialogClose() {
 					GlobalVar.getInstance().clearAllObject();
+					new PreferenceHelper(activity).removePreference(Constant.LOGIN_STATUS);
 					if(activity.getClass() == MainMenuActivity.class) {
 						Intent intent = new Intent(activity, LoginActivity.class);
 						activity.startActivity(intent);

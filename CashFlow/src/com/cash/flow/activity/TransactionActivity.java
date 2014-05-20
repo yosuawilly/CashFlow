@@ -1,9 +1,14 @@
 package com.cash.flow.activity;
 
+import java.io.File;
+import java.text.MessageFormat;
 import java.util.List;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import android.util.Log;
@@ -20,9 +25,11 @@ import com.cash.flow.activity.base.BaseCashFlowActivity;
 import com.cash.flow.adapter.FragmentAdapter;
 import com.cash.flow.customcomponent.CustomViewPager;
 import com.cash.flow.fragment.SummaryFragment;
+import com.cash.flow.listener.DialogListener;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.task.ExportDataToExcelTask;
 import com.cash.flow.task.TaskCompleteListener;
+import com.cash.flow.util.Constant;
 import com.cash.flow.util.TabSetupTools;
 import com.cash.flow.util.TabSetupTools.OnTabChanged;
 import com.cash.flow.util.Utility;
@@ -42,6 +49,7 @@ OnClickListener, TaskCompleteListener{
 	private boolean changeFromTab = false;
 	
 	private Button exportButton;
+	private String fileName = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -209,18 +217,25 @@ OnClickListener, TaskCompleteListener{
 			dialog.findViewById(R.id.buttonExport).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					String fileName = fileNameEdit.getText().toString().trim();
+					fileName = fileNameEdit.getText().toString().trim();
 					if(fileName.equals("")) {
 						Utility.showMessage(TransactionActivity.this, TransactionActivity.this.getString(R.string.message_fileNameRequired));
 					} else {
-						List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
-						
-						ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(TransactionActivity.this, TransactionActivity.this, 
-								"Exporting data ...", EXPORT_DATA);
-						dataToExcelTask.setCashFlows(cashFlows);
-						dataToExcelTask.execute(fileName);
-						
-						dialog.dismiss();
+						File exportFile = new File(Environment.getExternalStorageDirectory(), "CashFlow/ExportData/"+fileName+".xls");
+						if(exportFile.exists()) {
+							Utility.showConfirmMessage(TransactionActivity.this, "File Exist", 
+									getString(R.string.message_fileExist), new DialogListener() {
+								
+								@Override
+								public void onDialogClose() {
+									exportReport();
+									dialog.dismiss();
+								}
+							});
+						} else {
+							exportReport();
+							dialog.dismiss();
+						}
 					}
 				}
 			});
@@ -236,13 +251,34 @@ OnClickListener, TaskCompleteListener{
 			
 		}
 	}
+	
+	private void exportReport() {
+		List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
+		
+		ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(TransactionActivity.this, TransactionActivity.this, 
+				"Exporting data ...", EXPORT_DATA);
+		dataToExcelTask.setCashFlows(cashFlows);
+		dataToExcelTask.execute(fileName);
+	}
 
 	@Override
 	public void onTaskComplete(Integer idCaller, boolean sukses, String errorMessage) {
 		if(!sukses) {
 			Utility.showErrorMessage(this, errorMessage);
 		} else {
-			Utility.showMessage(this, getString(R.string.message_reportSuksesGenerated));
+			//Utility.showMessage(this, getString(R.string.message_reportSuksesGenerated));
+			final File exportDir = new File(Environment.getExternalStorageDirectory(), "CashFlow/ExportData/"+fileName+".xls");
+			String message = MessageFormat.format(getString(R.string.message_reportSuksesGenerated), exportDir.getAbsolutePath());
+			Utility.showConfirmMessage(this, "Export Success", message, 
+					"Show", "No", new DialogListener() {
+						
+						@Override
+						public void onDialogClose() {
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setDataAndType(Uri.fromFile(exportDir), "application/xls");
+							startActivityForResult(Intent.createChooser(intent, "Open File"), Constant.START_ACTIVITY);
+						}
+					});
 		}
 	}
 

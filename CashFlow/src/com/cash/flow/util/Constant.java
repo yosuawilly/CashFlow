@@ -12,6 +12,9 @@ public final class Constant {
 	public static final String DB_NAME="CashFlowDB";
 	public static final String DB_PATH="/data/data/com.cash.flow/databases/";
 	
+	public static final String LOGIN_STATUS = "LOGIN_STATUS";
+	public static final String DEFAULT_PREFERENCE = "CASHFLOW_PREFERENCE";
+	
 	public static final String SIMPLE_DATE_FORMAT = "E MMM dd ss:mm:HH z yyyy";
 	public static final String FORMAT_DATE_DDMMYYYY = "dd/MM/yyyy";
 	public static final String FORMAT_DATE_DDMMMMYYYY = "dd MMMM yyyy";
