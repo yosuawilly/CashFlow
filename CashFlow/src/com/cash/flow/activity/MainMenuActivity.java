@@ -15,6 +15,7 @@ import com.cash.flow.activity.base.BaseCashFlowNoActionBarActivity;
 import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.model.CashFlow.CashType;
+import com.cash.flow.model.User;
 import com.cash.flow.util.NominalFormatter;
 import com.cash.flow.util.NumberUtil;
 import com.cash.flow.util.Utility;
@@ -39,8 +40,9 @@ public class MainMenuActivity extends BaseCashFlowNoActionBarActivity implements
 
 		@Override
 		public void run() {
+			User user = GlobalVar.getInstance().getUser();
 			((TextView) findViewById(R.id.balanceTV))
-			.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(GlobalVar.getInstance().getUser().getBalance())));
+			.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(user.getBalance()), user.getCurrency()));
 		}
 		
 	}
@@ -51,8 +53,9 @@ public class MainMenuActivity extends BaseCashFlowNoActionBarActivity implements
 		
 		firstFundEdit = (EditText) findViewById(R.id.firstFundEdit);
 		
+		User user = GlobalVar.getInstance().getUser();
 		((TextView) findViewById(R.id.balanceTV))
-		.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(GlobalVar.getInstance().getUser().getBalance())));
+		.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(user.getBalance()), user.getCurrency()));
 	}
 	
 	@Override

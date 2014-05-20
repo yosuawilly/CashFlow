@@ -26,9 +26,13 @@ public class User {
 	@DatabaseField(dataType=DataType.LONG)
 	private long margin;
 	
+	@DatabaseField(dataType=DataType.ENUM_STRING)
+	private Currency currency;
+	
 	public User() {
 		this.balance = 0L;
 		this.margin = 0L;
+		this.currency = Currency.IDR;
 	}
 
 	public String getUsername() {
@@ -77,6 +81,14 @@ public class User {
 	
 	public void setMargin(long margin) {
 		this.margin = margin;
+	}
+	
+	public Currency getCurrency() {
+		return currency;
+	}
+	
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 }

@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 
+import com.cash.flow.model.Currency;
+
 public final class NumberUtil {
 	
     private NumberUtil() {
@@ -88,6 +90,13 @@ public final class NumberUtil {
 //		return temp;
 	}
 	
+	public static String toCurrDigitGrouping(String number, Currency currency){
+		BigDecimal dec = new BigDecimal(number);
+		NumberFormat formatter = new DecimalFormat("#,###.##");
+        String nilai = formatter.format(dec);
+        nilai = nilai.replace(",", ".");
+		return currency.toString()+" " + nilai + ",00";
+	}
 	
 	public static String toCurrDigitGrouping(String number){
 		BigDecimal dec = new BigDecimal(number);

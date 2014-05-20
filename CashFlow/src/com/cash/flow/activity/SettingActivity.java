@@ -1,5 +1,7 @@
 package com.cash.flow.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,10 @@ import com.cash.flow.activity.setting.EditLastTransActivity;
 import com.cash.flow.activity.setting.SetMarginActivity;
 import com.cash.flow.adapter.MenuListAdapter;
 import com.cash.flow.database.dao.CashFlowDao;
+import com.cash.flow.database.dao.UserDao;
+import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.CashFlow;
+import com.cash.flow.model.Currency;
 import com.cash.flow.util.Constant;
 import com.cash.flow.util.Utility;
 
@@ -50,7 +55,34 @@ public class SettingActivity extends BaseCashFlowListActivity{
 			Intent intent = new Intent(this, SetMarginActivity.class);
 			startActivityForResult(intent, Constant.START_ACTIVITY);
 		} else if("Currency".equals(item)) {
+			final String[]items = Currency.getCurrency();
+			Currency current = GlobalVar.getInstance().getUser().getCurrency();
 			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Select Currency");
+			builder.setSingleChoiceItems(items, current.ordinal(), new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int position) {
+					Currency select = Currency.valueOf(items[position]);
+					GlobalVar.getInstance().getUser().setCurrency(select);
+					
+					UserDao userDao = UserDao.getInstance(SettingActivity.this);
+					userDao.updateData(GlobalVar.getInstance().getUser());
+					userDao.closeConnection();
+					
+					sendBroadcast(new Intent(MainMenuActivity.REFRESH_ACTION));
+					dialog.dismiss();
+				}
+			});
+			builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int arg1) {
+					dialog.dismiss();
+				}
+			});
+			builder.setCancelable(false);
+			builder.create().show();
 		} else if("Edit Last Transaction".equals(item)) {
 			CashFlowDao cashFlowDao = CashFlowDao.getInstance(this);
 			CashFlow lastCash = cashFlowDao.findLastTransaction();
