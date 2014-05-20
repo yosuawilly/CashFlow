@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -275,7 +276,9 @@ OnClickListener, TaskCompleteListener{
 						@Override
 						public void onDialogClose() {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setDataAndType(Uri.fromFile(exportDir), "application/xls");
+							//intent.setDataAndType(Uri.fromFile(exportDir), "application/xls");
+							//intent.setData(Uri.fromFile(exportDir));
+							intent.setDataAndType(Uri.fromFile(exportDir), MimeTypeMap.getSingleton().getMimeTypeFromExtension("xls"));
 							startActivityForResult(Intent.createChooser(intent, "Open File"), Constant.START_ACTIVITY);
 						}
 					});
