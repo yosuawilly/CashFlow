@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.cash.flow.R;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.model.CashFlow.CashType;
+import com.cash.flow.util.CashFlowUtil;
 import com.cash.flow.util.NominalFormatter;
 import com.cash.flow.util.NumberUtil;
 import com.cash.flow.util.Utility;
@@ -80,7 +81,7 @@ public class CashInFragment extends SherlockFragment implements OnClickListener{
 				cashFlow.setDescription(description);
 				cashFlow.setTypeCash(CashType.CASH_IN);
 				
-				Utility.saveCashFlow(context, cashFlow);
+				CashFlowUtil.saveCashFlow(context, cashFlow);
 				
 				nominalEdit.setText("");
 				descriptionEdit.setText("");

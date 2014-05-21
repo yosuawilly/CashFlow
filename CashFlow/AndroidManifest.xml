@@ -85,6 +85,9 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
+        
+        <receiver android:name="com.cash.flow.receiver.AlarmReceiver" android:process=":remote" />
+        
     </application>
 
 </manifest>

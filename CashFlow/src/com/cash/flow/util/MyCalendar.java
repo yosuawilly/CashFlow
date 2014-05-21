@@ -177,4 +177,16 @@ public class MyCalendar{
 	    return calendar.getTime();
 	}
 	
+	public static boolean isOneWeek(Date from, Date to) {
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		
+		cal1.setTime(from);
+		cal2.setTime(to);
+		
+		cal1.add(Calendar.DATE, 7);
+		if(cal1.get(Calendar.DATE) == cal2.get(Calendar.DATE)) return true;
+		else return false;
+	}
+	
 }

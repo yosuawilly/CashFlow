@@ -14,6 +14,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
 
+@SuppressWarnings("deprecation")
 public class TabSetupTools implements OnTabChangeListener{
 	
 	private Activity activity;

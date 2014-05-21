@@ -209,6 +209,12 @@ OnClickListener, TaskCompleteListener{
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == exportButton.getId()) {
+			if(((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows().size() == 0) {
+				Utility.showMessage(this, "Close", getString(R.string.message_noDataExport));
+				
+				return;
+			}
+			
 			final Dialog dialog = new Dialog(this);
 			dialog.setContentView(R.layout.input_file_name_layout);
 			dialog.setTitle("Export Report");
@@ -222,6 +228,10 @@ OnClickListener, TaskCompleteListener{
 					if(fileName.equals("")) {
 						Utility.showMessage(TransactionActivity.this, TransactionActivity.this.getString(R.string.message_fileNameRequired));
 					} else {
+						if(fileName.contains(".xls")) {
+							fileName = fileName.substring(0, fileName.indexOf(".xls"));
+						}
+						
 						File exportFile = new File(Environment.getExternalStorageDirectory(), "CashFlow/ExportData/"+fileName+".xls");
 						if(exportFile.exists()) {
 							Utility.showConfirmMessage(TransactionActivity.this, "File Exist", 

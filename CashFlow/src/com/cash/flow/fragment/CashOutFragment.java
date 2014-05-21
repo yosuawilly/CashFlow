@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.cash.flow.R;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.model.CashFlow.CashType;
+import com.cash.flow.util.CashFlowUtil;
 import com.cash.flow.util.NominalFormatter;
 import com.cash.flow.util.NumberUtil;
 import com.cash.flow.util.Utility;
@@ -80,7 +81,12 @@ public class CashOutFragment extends SherlockFragment implements OnClickListener
 				cashFlow.setDescription(description);
 				cashFlow.setTypeCash(CashType.CASH_OUT);
 				
-				Utility.saveCashFlow(context, cashFlow);
+				if(!CashFlowUtil.isBalanceEnough(cashFlow)) {
+					Utility.showMessage(context, "Close", context.getString(R.string.message_balanceNotEnough));
+					return;
+				}
+				
+				CashFlowUtil.saveCashFlow(context, cashFlow);
 				
 				nominalEdit.setText("");
 				descriptionEdit.setText("");

@@ -36,5 +36,20 @@ public final class Constant {
 	public static final int REDIRECT_TO_TRANSACTION = 2;
 	public static final int REDIRECT_TO_SETTING = 3;
 	public static final int REDIRECT_TO_LOGIN = 4;
+	
+	/* Alarm Constant*/
+	public static final String RECORD_ID = "RECORD_ID";
+	public static final String IS_SNOOZE = "isSnooze";
+	
+	public static final int NO_REPEAT = 0;
+	public static final int DAILY = 1;
+	public static final int WEEKLY = 2;
+	public static final int MONTHLY = 3;
+	public static final int FIVE_MINUTE = 4;
+	public static final int TEN_MINUTE = 5;
+	public static final int FIVTEEN_MINUTE = 6;
+	public static final int ONE_HOUR = 7;
+	
+	public static final int LOW_BALANCE_ALARM = 10;
 
 }

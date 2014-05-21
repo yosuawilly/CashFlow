@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -166,7 +167,9 @@ public class ExportDataToExcelTask extends BaseTask{
 					data = data.replaceAll("\"", "");
 					
 					if(k > 0){
-						if(data.matches("^[1-9]+$")) {
+						//if(data.matches("^[1-9]+$")) {
+						if(data.matches("^[0-9]*(\\.[0-9]+)?$")) {
+							//System.out.println("masuk regex");
 							cell.setCellType(Cell.CELL_TYPE_NUMERIC);
 							cell.setCellValue(Double.valueOf(data));
 						} else cell.setCellValue(data);
@@ -190,7 +193,7 @@ public class ExportDataToExcelTask extends BaseTask{
 					if(k==0) cell.setCellStyle(csBold);
 					else {
 						if(p==1 || p==2 || p==4) {
-							if(!data.equals("-")) cell.setCellStyle(csRight);
+							/*if(!data.equals("-"))*/ cell.setCellStyle(csRight);
 						}
 					}
 					
@@ -243,6 +246,7 @@ public class ExportDataToExcelTask extends BaseTask{
 		//csRight.setRightBorderColor(IndexedColors.BLACK.getIndex());
 		csRight.setAlignment(CellStyle.ALIGN_RIGHT);
 		csRight.setFont(f);
+		csRight.setDataFormat(HSSFDataFormat.getBuiltinFormat(/*"#,##0"*/ "#,##0.00"));
 
 		// Setup style for Bottom Border Line
 		csBottom = wb.createCellStyle();

@@ -16,6 +16,7 @@ import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.model.CashFlow.CashType;
 import com.cash.flow.model.User;
+import com.cash.flow.util.CashFlowUtil;
 import com.cash.flow.util.NominalFormatter;
 import com.cash.flow.util.NumberUtil;
 import com.cash.flow.util.Utility;
@@ -43,6 +44,12 @@ public class MainMenuActivity extends BaseCashFlowNoActionBarActivity implements
 			User user = GlobalVar.getInstance().getUser();
 			((TextView) findViewById(R.id.balanceTV))
 			.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(user.getBalance()), user.getCurrency()));
+			
+			if(CashFlowUtil.isLowBalance()) {
+				findViewById(R.id.alertTV).setVisibility(View.VISIBLE);
+			} else {
+				findViewById(R.id.alertTV).setVisibility(View.GONE);
+			}
 		}
 		
 	}
@@ -56,6 +63,10 @@ public class MainMenuActivity extends BaseCashFlowNoActionBarActivity implements
 		User user = GlobalVar.getInstance().getUser();
 		((TextView) findViewById(R.id.balanceTV))
 		.setText(NumberUtil.toCurrDigitGrouping(String.valueOf(user.getBalance()), user.getCurrency()));
+		
+		if(CashFlowUtil.isLowBalance()) {
+			findViewById(R.id.alertTV).setVisibility(View.VISIBLE);
+		}
 	}
 	
 	@Override
@@ -91,7 +102,7 @@ public class MainMenuActivity extends BaseCashFlowNoActionBarActivity implements
 				cashFlow.setDescription(getString(R.string.default_description));
 				cashFlow.setTypeCash(CashType.CASH_IN);
 				
-				Utility.saveCashFlow(this, cashFlow);
+				CashFlowUtil.saveCashFlow(this, cashFlow);
 				
 				firstFundEdit.setText("");
 				

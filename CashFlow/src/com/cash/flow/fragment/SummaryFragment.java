@@ -203,11 +203,12 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 			
 			switch (spinnerType.getSelectedItemPosition()) {
 			case 0: //weekly
-//				Calendar calendar = Calendar.getInstance();
-//				calendar.setTime(toDate);
-//				Calendar calendar2 = Calendar.getInstance();
-//				calendar2.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
-//				toDate = calendar2.getTime();
+				if(!MyCalendar.isOneWeek(fromDate, toDate)) {
+					Utility.showMessage(context, "Close", getString(R.string.message_rangeOneWeek));
+					
+					break;
+				}
+				
 				toDate = MyCalendar.resetDate(toDate);
 				buildListCashFlow(fromDate, toDate);
 				break;

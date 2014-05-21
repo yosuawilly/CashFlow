@@ -22,6 +22,10 @@
     <string name="message.reportSuksesGenerated">Report generated to {0}\n\nDo you want to show file?</string>
     <string name="message.fileNameRequired">Filename required</string>
     <string name="message.fileExist">File is exist, do you want to replace?</string>
+    <string name="message.noDataExport">There is no data to be exported</string>
+    <string name="message.rangeOneWeek">Range of date should one week</string>
+    <string name="message.balanceNotEnough">Your balance is not enough</string>
+    <string name="message.lowBalance">Your balance is low</string>
     
     <string name="message.logout">Are you sure want to logout?</string>
     

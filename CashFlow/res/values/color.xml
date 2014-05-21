@@ -4,6 +4,7 @@
 	<color name="dark_yellow">#EEAD0E</color>
 	<color name="orange">#FF9D00</color>
 	<color name="black">#040404</color>
+	<color name="red">#FF0000</color>
 	<color name="transparent">#00000000</color>
 	<color name="menu_text_default">#707070</color>
 	<color name="panel_bg">#29000000</color>	

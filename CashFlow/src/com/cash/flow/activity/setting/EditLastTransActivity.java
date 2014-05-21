@@ -11,6 +11,7 @@ import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseMyActivity;
 import com.cash.flow.listener.DialogListener;
 import com.cash.flow.model.CashFlow;
+import com.cash.flow.util.CashFlowUtil;
 import com.cash.flow.util.NominalFormatter;
 import com.cash.flow.util.NumberUtil;
 import com.cash.flow.util.Utility;
@@ -86,7 +87,7 @@ public class EditLastTransActivity extends BaseMyActivity implements OnClickList
 					lastCash.setNominal(Long.valueOf(nominal));
 					lastCash.setDescription(description);
 					
-					Utility.updateCashFlow(this, lastCash);
+					CashFlowUtil.updateCashFlow(this, lastCash);
 					
 					Utility.showMessage(this, "Close", getString(R.string.message_dataSaved), new DialogListener() {
 						@Override
