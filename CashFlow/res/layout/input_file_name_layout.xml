@@ -24,8 +24,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Insert filename of report"
-            android:textColor="@color/white"
-            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
             android:singleLine="true"/>
         
         <LinearLayout 
