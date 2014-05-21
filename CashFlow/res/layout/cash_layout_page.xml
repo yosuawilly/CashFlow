@@ -53,9 +53,11 @@
 		        android:id="@+id/descriptionEdit"
 		        style="@style/edit_theme"
 		        android:layout_width="0dp"
-		        android:singleLine="true"
-		        android:maxLength="20"
-		        android:layout_weight="0.6"/>
+		        android:layout_height="70dp"
+		        android:singleLine="false"
+		        android:maxLength="50"
+		        android:layout_weight="0.6"
+		        android:gravity="top"/>
 	    </LinearLayout>
 	    
 	    <Button 

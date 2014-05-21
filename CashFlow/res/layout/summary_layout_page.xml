@@ -78,9 +78,9 @@
 
                     <Button
                         android:id="@+id/pickFromDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_dt_picker" />
+                        android:layout_width="60px"
+                        android:layout_height="60px"
+                        android:background="@drawable/calendar" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -109,9 +109,9 @@
 
                     <Button
                         android:id="@+id/pickToDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_dt_picker" />
+                        android:layout_width="60px"
+                        android:layout_height="60px"
+                        android:background="@drawable/calendar" />
                 </LinearLayout>
             </LinearLayout>
             

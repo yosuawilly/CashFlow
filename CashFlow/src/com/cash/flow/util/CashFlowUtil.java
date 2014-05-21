@@ -3,6 +3,7 @@ package com.cash.flow.util;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -13,7 +14,6 @@ import com.cash.flow.database.dao.CashFlowDao;
 import com.cash.flow.database.dao.UserDao;
 import com.cash.flow.global.GlobalVar;
 import com.cash.flow.model.CashFlow;
-import com.cash.flow.model.User;
 import com.cash.flow.model.CashFlow.CashType;
 
 public class CashFlowUtil {
@@ -77,12 +77,11 @@ public class CashFlowUtil {
 	}
 	
 	public static boolean isLowBalance() {
-		return GlobalVar.getInstance().getUser().getBalance() < GlobalVar.getInstance().getUser().getMargin();
+		return GlobalVar.getInstance().getUser().getBalance() <= GlobalVar.getInstance().getUser().getMargin();
 	}
 	
 	public static void cekLowBalance(Context context) {
-		User user = GlobalVar.getInstance().getUser();
-		if(user.getBalance() < user.getMargin()) {
+		if(isLowBalance()) {
 			if(!AlarmUtil.isAlarmExist(context, Constant.LOW_BALANCE_ALARM)) {
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(new Date());
@@ -96,6 +95,9 @@ public class CashFlowUtil {
 			if(AlarmUtil.isAlarmExist(context, Constant.LOW_BALANCE_ALARM)) {
 				AlarmUtil.cancelAlarm(context, Constant.LOW_BALANCE_ALARM);
 				Log.i("cancel", "alarm");
+				
+				NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+				notificationManager.cancel(Constant.NOTIF_LOW_BALANCE);
 			}
 		}
 	}

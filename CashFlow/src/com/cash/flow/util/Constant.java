@@ -51,5 +51,6 @@ public final class Constant {
 	public static final int ONE_HOUR = 7;
 	
 	public static final int LOW_BALANCE_ALARM = 10;
+	public static final int NOTIF_LOW_BALANCE = 123;
 
 }

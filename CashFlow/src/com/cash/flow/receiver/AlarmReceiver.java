@@ -46,9 +46,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 		intent2.putExtra(Constant.IS_SNOOZE, isSnooze);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent2, Intent.FLAG_ACTIVITY_NEW_TASK);
 		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		//notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		notification.flags |= Notification.FLAG_ONGOING_EVENT;
 		notification.setLatestEventInfo(context.getApplicationContext(), notificationTitle, notificationText, pendingIntent);
-		notificationManager.notify(0, notification);
+		notificationManager.notify(Constant.NOTIF_LOW_BALANCE, notification);
 	}
 
 }
