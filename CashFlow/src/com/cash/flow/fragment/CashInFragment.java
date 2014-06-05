@@ -1,6 +1,7 @@
 package com.cash.flow.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,9 +28,23 @@ public class CashInFragment extends SherlockFragment implements OnClickListener{
 	private EditText nominalEdit;
 	private EditText descriptionEdit;
 	
-	public CashInFragment(Context context) {
-		this.context = context;
+	public CashInFragment() {
+		// TODO Auto-generated constructor stub
 	}
+	
+	public static CashInFragment newInstance() {
+		return new CashInFragment();
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		this.context = getActivity();
+	}
+	
+	/*public CashInFragment(Context context) {
+		//this.context = context;
+	}*/
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +69,12 @@ public class CashInFragment extends SherlockFragment implements OnClickListener{
 		NominalFormatter.setTextNominalListener(nominalEdit);
 		
 		viewGroup.findViewById(R.id.button_save).setOnClickListener(this);
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		setRetainInstance(true);
 	}
 	
 	@Override

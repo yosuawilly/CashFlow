@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class FragmentAdapter extends FragmentPagerAdapter{
 	
-	private Context context;
+	//private Context context;
 
 	private CashInFragment cashInFragment;
 	private CashOutFragment cashOutFragment;
@@ -19,7 +19,7 @@ public class FragmentAdapter extends FragmentPagerAdapter{
 	
 	public FragmentAdapter(Context context, FragmentManager fm) {
 		super(fm);
-		this.context = context;
+		//this.context = context;
 	}
 
 	@Override
@@ -29,21 +29,21 @@ public class FragmentAdapter extends FragmentPagerAdapter{
 		switch (position) {
 		case 0:
 			if(cashInFragment==null) {
-				cashInFragment = new CashInFragment(context);
+				cashInFragment = new CashInFragment();
 			}
 			
 			fragment = cashInFragment;
 			break;
 		case 1:
 			if(cashOutFragment==null) {
-				cashOutFragment = new CashOutFragment(context);
+				cashOutFragment = new CashOutFragment();
 			}
 			
 			fragment = cashOutFragment;
 			break;
 		case 2:
 			if(summaryFragment==null) {
-				summaryFragment = new SummaryFragment(context);
+				summaryFragment = new SummaryFragment();
 			}
 			
 			fragment = summaryFragment;

@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -55,9 +56,23 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	private ListView listCashFlow;
 	private CashFlowListAdapter listAdapter;
 	
-	public SummaryFragment(Context context) {
-		this.context = context;
+	public SummaryFragment() {
+		// TODO Auto-generated constructor stub
 	}
+	
+	public static SummaryFragment newInstance() {
+		return new SummaryFragment();
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		this.context = getActivity();
+	}
+	
+	/*public SummaryFragment(Context context) {
+		this.context = context;
+	}*/
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +120,12 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		listCashFlow = (ListView) viewGroup.findViewById(R.id.listCashFlow);
 		
 		initializeListener();
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		setRetainInstance(true);
 	}
 	
 	private void initializeListener() {
