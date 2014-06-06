@@ -1,13 +1,17 @@
 package com.cash.flow.model;
 
+import java.io.Serializable;
+
 import com.cash.flow.database.dao.UserDao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "t_user", daoClass=UserDao.class)
-public class User {
+public class User implements Serializable{
 	
+	private static final long serialVersionUID = -5667885497702615226L;
+
 	@DatabaseField(id=true, canBeNull=false, dataType=DataType.STRING)
 	private String username;
 	

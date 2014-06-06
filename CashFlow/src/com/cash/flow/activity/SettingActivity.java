@@ -94,7 +94,9 @@ public class SettingActivity extends BaseCashFlowListActivity{
 			}
 			
 			Intent intent = new Intent(this, EditLastTransActivity.class);
-			intent.putExtra("cashflow", lastCash);
+			/*Bundle bundle = new Bundle();
+			bundle.putSerializable("cashflow", lastCash);
+			intent.putExtras(bundle);*/
 			startActivityForResult(intent, Constant.START_ACTIVITY);
 		}
 	}

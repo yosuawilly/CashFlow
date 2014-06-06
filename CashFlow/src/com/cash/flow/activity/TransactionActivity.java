@@ -25,8 +25,8 @@ import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseCashFlowActivity;
 import com.cash.flow.adapter.FragmentAdapter;
 import com.cash.flow.customcomponent.CustomViewPager;
-import com.cash.flow.fragment.SummaryFragment;
 import com.cash.flow.listener.DialogListener;
+import com.cash.flow.listener.SummaryFragmentListener;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.task.ExportDataToExcelTask;
 import com.cash.flow.task.TaskCompleteListener;
@@ -51,6 +51,8 @@ OnClickListener, TaskCompleteListener{
 	
 	private Button exportButton;
 	private String fileName = "";
+	
+	public SummaryFragmentListener summaryFragmentListener;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -209,7 +211,7 @@ OnClickListener, TaskCompleteListener{
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == exportButton.getId()) {
-			if(((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows().size() == 0) {
+			if(summaryFragmentListener.getCashFlows().size() == 0) {
 				Utility.showMessage(this, "Close", getString(R.string.message_noDataExport));
 				
 				return;
@@ -264,7 +266,7 @@ OnClickListener, TaskCompleteListener{
 	}
 	
 	private void exportReport() {
-		List<CashFlow> cashFlows = ((SummaryFragment)fragmentAdapter.getItem(2)).getCashFlows();
+		List<CashFlow> cashFlows = summaryFragmentListener.getCashFlows();
 		
 		ExportDataToExcelTask dataToExcelTask = new ExportDataToExcelTask(TransactionActivity.this, TransactionActivity.this, 
 				"Exporting data ...", EXPORT_DATA);

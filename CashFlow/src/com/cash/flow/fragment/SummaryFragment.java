@@ -27,15 +27,22 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.cash.flow.R;
+import com.cash.flow.activity.TransactionActivity;
 import com.cash.flow.adapter.CashFlowListAdapter;
 import com.cash.flow.database.dao.CashFlowDao;
+import com.cash.flow.global.GlobalVar;
+import com.cash.flow.listener.SummaryFragmentListener;
 import com.cash.flow.model.CashFlow;
+import com.cash.flow.model.User;
 import com.cash.flow.util.Constant;
 import com.cash.flow.util.MyCalendar;
 import com.cash.flow.util.Utility;
 
 @SuppressLint("ValidFragment")
-public class SummaryFragment extends SherlockFragment implements OnClickListener{
+public class SummaryFragment extends SherlockFragment implements OnClickListener, SummaryFragmentListener{
+	
+	private static final String BUNDLE_CASHFLOW = "BUNDLE_CASHFLOW";
+	private static final String BUNDLE_GLOBALVAR = "BUNDLE_GLOBALVAR";
 	
 	private Context context;
 	private ViewGroup viewGroup;
@@ -68,6 +75,7 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		this.context = getActivity();
+		((TransactionActivity)context).summaryFragmentListener = this;
 	}
 	
 	/*public SummaryFragment(Context context) {
@@ -77,6 +85,21 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(savedInstanceState != null) {
+			cashFlows = savedInstanceState.getParcelableArrayList(BUNDLE_CASHFLOW);
+			if(GlobalVar.getInstance().getUser()==null) {
+				GlobalVar.getInstance().setUser((User)savedInstanceState.getSerializable(BUNDLE_GLOBALVAR));
+			}
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		ArrayList<CashFlow> cashFlows = new ArrayList<CashFlow>();
+		cashFlows.addAll(this.cashFlows);
+		outState.putParcelableArrayList(BUNDLE_CASHFLOW, cashFlows);
+		outState.putSerializable(BUNDLE_GLOBALVAR, GlobalVar.getInstance().getUser());
 	}
 	
 	@Override
@@ -120,6 +143,11 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		listCashFlow = (ListView) viewGroup.findViewById(R.id.listCashFlow);
 		
 		initializeListener();
+		
+		//init listCashFlow
+		listAdapter = new CashFlowListAdapter(context, cashFlows);
+		listCashFlow.setAdapter(listAdapter);
+		listAdapter.notifyDataSetChanged();
 	}
 	
 	@Override
@@ -186,6 +214,7 @@ public class SummaryFragment extends SherlockFragment implements OnClickListener
 		cashFlowDao.closeConnection();
 	}
 	
+	@Override
 	public List<CashFlow> getCashFlows() {
 		return cashFlows;
 	}

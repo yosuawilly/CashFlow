@@ -33,6 +33,10 @@ public class GlobalVar implements Serializable{
 		return GlobalVar.instance;
 	}
 	
+	public static void setInstance(GlobalVar instance) {
+		GlobalVar.instance = instance;
+	}
+	
 	public List<String> getClassNames() {
 		return classNames;
 	}

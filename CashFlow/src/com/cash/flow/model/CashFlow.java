@@ -3,13 +3,17 @@ package com.cash.flow.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.cash.flow.database.dao.CashFlowDao;
+import com.cash.flow.util.MyCalendar;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "t_cash_flow", daoClass=CashFlowDao.class)
-public class CashFlow implements Serializable{
+public class CashFlow implements Serializable, Parcelable{
 	
 	private static final long serialVersionUID = -289037265889693689L;
 	
@@ -103,5 +107,41 @@ public class CashFlow implements Serializable{
 	public void setBalance(long balance) {
 		this.balance = balance;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public CashFlow(Parcel in) {
+		this.nominal = in.readLong();
+		this.description = in.readString();
+		this.timestamp = MyCalendar.toDate(in.readString());
+		this.typeCash = CashType.values()[in.readInt()];
+		this.balance = in.readLong();
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(nominal);
+		dest.writeString(description);
+		dest.writeString(MyCalendar.toString(timestamp));
+		dest.writeInt(typeCash.ordinal());
+		dest.writeLong(balance);
+	}
+	
+	public static final Parcelable.Creator<CashFlow> CREATOR = new Parcelable.Creator<CashFlow>() {
+
+		@Override
+		public CashFlow createFromParcel(Parcel source) {
+			return new CashFlow(source);
+		}
+
+		@Override
+		public CashFlow[] newArray(int size) {
+			return new CashFlow[size];
+		}
+	};
 
 }

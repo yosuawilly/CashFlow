@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.cash.flow.R;
 import com.cash.flow.activity.base.BaseMyActivity;
+import com.cash.flow.database.dao.CashFlowDao;
 import com.cash.flow.listener.DialogListener;
 import com.cash.flow.model.CashFlow;
 import com.cash.flow.util.CashFlowUtil;
@@ -30,9 +31,14 @@ public class EditLastTransActivity extends BaseMyActivity implements OnClickList
 	@Override
 	public void initBundle() {
 		super.initBundle();
-		if(getIntent().getExtras() != null) {
+		/*if(getIntent().getExtras() != null) {
 			lastCash = (CashFlow) getIntent().getSerializableExtra("cashflow");
-		}
+		}*/
+		
+		//Get Lash Transaction
+		CashFlowDao cashFlowDao = CashFlowDao.getInstance(this);
+		lastCash = cashFlowDao.findLastTransaction();
+		cashFlowDao.closeConnection();
 	}
 	
 	@Override
