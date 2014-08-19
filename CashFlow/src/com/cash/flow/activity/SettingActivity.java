@@ -1,5 +1,11 @@
 package com.cash.flow.activity;
 
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +19,8 @@ import com.cash.flow.activity.setting.ChangePasswordActivity;
 import com.cash.flow.activity.setting.EditLastTransActivity;
 import com.cash.flow.activity.setting.SetMarginActivity;
 import com.cash.flow.adapter.MenuListAdapter;
+import com.cash.flow.customcomponent.FileDialog;
+import com.cash.flow.database.DatabaseExportImport;
 import com.cash.flow.database.dao.CashFlowDao;
 import com.cash.flow.database.dao.UserDao;
 import com.cash.flow.global.GlobalVar;
@@ -35,15 +43,20 @@ public class SettingActivity extends BaseCashFlowListActivity{
 				"Change Password",
 				"Set Margin",
 				"Currency",
-				"Edit Last Transaction"
+				"Edit Last Transaction",
+				"Backup Database",
+				"Restore Database"
 		}, new int[]{
 				R.drawable.change_password_icon,
 				R.drawable.coins,
 				R.drawable.dollars,
-				R.drawable.edit
+				R.drawable.edit,
+				R.drawable.backup_db_icon,
+				R.drawable.restore_db_icon
 		});
 	}
 	
+	@SuppressLint("SdCardPath") 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		MenuListAdapter adapter = (MenuListAdapter) l.getAdapter();
@@ -98,6 +111,51 @@ public class SettingActivity extends BaseCashFlowListActivity{
 			bundle.putSerializable("cashflow", lastCash);
 			intent.putExtras(bundle);*/
 			startActivityForResult(intent, Constant.START_ACTIVITY);
+		} else if("Backup Database".equals(item)) {
+			if (DatabaseExportImport.exportDb(this)) {
+				Utility.showMessage(this, "Close", "Backup Success");
+			} else Utility.showErrorMessage(this, "Database doesn't exist");
+		} else if("Restore Database".equals(item)) {
+			Intent intent = new Intent(getBaseContext(), FileDialog.class);
+            intent.putExtra(FileDialog.START_PATH, "/sdcard");
+            
+            //can user select directories or not
+            intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
+            
+            //alternatively you can set file filter
+            //intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "png" });
+            
+            startActivityForResult(intent, Constant.BROWSE_FILE);
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == Activity.RESULT_OK) {
+
+			if (requestCode == Constant.BROWSE_FILE) {
+				//String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
+				File dbFile = (File) data.getSerializableExtra(FileDialog.RESULT_FILE);
+				if (DatabaseExportImport.importIntoDb(this, dbFile)) {
+					Utility.showMessage(this, "Close", "Restore Success");
+					CashFlowDao cashFlowDao = CashFlowDao.getInstance(this);
+					CashFlow cashFlow = cashFlowDao.findLastTransaction();
+					if (cashFlow!=null) {
+						UserDao userDao = UserDao.getInstance(this);
+						GlobalVar.getInstance().getUser().setBalance(cashFlow.getBalance());
+						userDao.updateData(GlobalVar.getInstance().getUser());
+						
+						userDao.closeConnection();
+					}
+					cashFlowDao.closeConnection();
+					
+					sendBroadcast(new Intent(MainMenuActivity.REFRESH_ACTION));
+				} else Utility.showErrorMessage(this, "Restore Failed");
+			}
+
+		} else if (resultCode == Activity.RESULT_CANCELED) {
+			Logger.getLogger(SettingActivity.class.getName()).log(Level.WARNING, "file not selected");
 		}
 	}
 

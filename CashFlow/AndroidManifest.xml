@@ -85,6 +85,12 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.cash.flow.customcomponent.FileDialog"
+            android:theme="@style/app_theme"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
         
         <receiver android:name="com.cash.flow.receiver.AlarmReceiver" android:process=":remote" />
         

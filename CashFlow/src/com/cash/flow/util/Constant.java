@@ -11,12 +11,14 @@ public final class Constant {
 	public static final String DB_USER_NAME="CashFlowUserDB";
 	public static final String DB_NAME="CashFlowDB";
 	public static final String DB_PATH="/data/data/com.cash.flow/databases/";
+	public static final String BACKUP_DATABASE_FOLDER = "CashFlow/backup";
 	
 	public static final String LOGIN_STATUS = "LOGIN_STATUS";
 	public static final String DEFAULT_PREFERENCE = "CASHFLOW_PREFERENCE";
 	
 	public static final String SIMPLE_DATE_FORMAT = "E MMM dd ss:mm:HH z yyyy";
 	public static final String FORMAT_DATE_DDMMYYYY = "dd/MM/yyyy";
+	public static final String FORMAT_DATE_DDMMYYYY_2 = "ddMMyyyy";
 	public static final String FORMAT_DATE_DDMMMMYYYY = "dd MMMM yyyy";
 	public static final String FORMAT_DATE_DDMMYYYY_HMS = "dd/MM/yyyy HH:mm:ss";
 	
@@ -36,6 +38,7 @@ public final class Constant {
 	public static final int REDIRECT_TO_TRANSACTION = 2;
 	public static final int REDIRECT_TO_SETTING = 3;
 	public static final int REDIRECT_TO_LOGIN = 4;
+	public static final int BROWSE_FILE = 5;
 	
 	/* Alarm Constant*/
 	public static final String RECORD_ID = "RECORD_ID";

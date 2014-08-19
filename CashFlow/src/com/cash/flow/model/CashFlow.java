@@ -17,6 +17,19 @@ public class CashFlow implements Serializable, Parcelable{
 	
 	private static final long serialVersionUID = -289037265889693689L;
 	
+	public static final String NOMINAL_COLUMN = "nominal";
+	public static final String DESCRIPTION_COLUMN = "description";
+	public static final String TIMESTAMP_COLUMN = "timestamp";
+	public static final String TYPECASH_COLUMN = "typeCash";
+	public static final String BALANCE_COLUMN = "balance";
+	public static final String[]ALL_COLUMN_KEYS = {
+		TIMESTAMP_COLUMN,
+		TYPECASH_COLUMN,
+		NOMINAL_COLUMN,
+		DESCRIPTION_COLUMN,
+		BALANCE_COLUMN
+	};
+	
 	//@DatabaseField(generatedId=true)
 	//private int id;
 
